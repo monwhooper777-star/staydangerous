@@ -33,8 +33,8 @@ export default function HeroSection() {
   className="mb-12 text-lg tracking-tight text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]"
   style={{ fontFamily: "Wednesday" }}
 >
-Welcome to monwhoopers repository of health, wealth & self. 
-  <br className="hidden md:block" /> Stay Dangerous.
+Welcome to monwhoopers repository of health, wealth  
+  <br className="hidden md:block" /> & self.
 </p>
 <Button
   asChild
