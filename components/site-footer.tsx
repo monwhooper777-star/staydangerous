@@ -73,10 +73,11 @@ export function SiteFooter() {
         <div className="md:flex md:justify-between px-8 p-4 py-16 sm:pb-16 gap-4">
           <div className="mb-12 flex-col flex gap-4">
             <Link href="/" className="flex items-center gap-2">
-              <img
-                src="https://magicui.design/icon.png"
-                className="h-8 w-8 text-primary"
-              />
+            <img
+  src="/footerlogo.png"
+  alt="Monwhooper Footer Logo"
+  className="h-12 w-auto object-contain"
+/>
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                 Magic UI
               </span>
