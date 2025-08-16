@@ -149,13 +149,13 @@ Investor💵📈📉 🪙
 🛠Jack Of All Trades🗽#
                 </p>
                 <a
-                  href="/"
+                  href="https://x.com/MonwhooperA1776"
                   className={cn(
                     buttonVariants({ size: "lg", variant: "outline" }),
                     "group mt-4 rounded-[2rem] px-6"
                   )}
                 >
-                  Get Started
+                  Follow on X
                   <ChevronRight className="ml-1 size-4 transition-all duration-300 ease-out group-hover:translate-x-1" />
                 </a>
               </div>
