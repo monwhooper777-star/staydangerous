@@ -29,11 +29,10 @@ export default function HeroSection() {
   Monwhooper
   <br className="hidden md:block" /> Stay Dangerous.
 </h1>
-<p
-  className="mb-12 text-lg tracking-tight text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]"
+<p className="mb-12 text-lg tracking-tight !text-white md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]" ...>
   style={{ fontFamily: "Wednesday" }}
 >
-Welcome to Monwhoopers repository of Health, Wealth  
+  Welcome to Monwhoopers repository of Health, Wealth  
   <br className="hidden md:block" /> & Self.
 </p>
 <Button
