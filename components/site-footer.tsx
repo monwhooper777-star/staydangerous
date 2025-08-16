@@ -55,9 +55,9 @@ const footerNavs = [
 
 const footerSocials = [
   {
-    href: "https://www.instagram.com/monwhooper_amazing1776/",
-    name: "Instagram",
-    icon: <InstagramLogoIcon className="h-4 w-4" />,
+    href: "",
+    name: "Discord",
+    icon: <DiscordLogoIcon className="h-4 w-4" />,
   },
   {
     href: "https://x.com/MonwhooperA1776",
