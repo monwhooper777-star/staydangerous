@@ -29,7 +29,13 @@ const tiles = [
     ),
   },
   {
-    icon: <Globe className="size-full" />,
+    icon: (
+      <img
+        src="/monwhooperlogo.png"
+        alt="Monwhooper wolf"
+        className="size-full object-contain"
+      />
+    ),
     bg: (
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 opacity-70 blur-[20px] filter"></div>
     ),
