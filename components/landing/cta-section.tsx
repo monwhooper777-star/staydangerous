@@ -16,7 +16,7 @@ const WolfIcon = (
   />
 );
 
-const halos = Array(6).fill("from-red-950 via-red-900 to-red-800");
+const halos = Array(6).fill("from-[#170000] via-[#2a0000] to-[#520000]");
 
 
 type Tile = { icon: JSX.Element; bg: JSX.Element };
@@ -146,7 +146,7 @@ export default function CallToActionSection() {
                 Keep 🇺🇸 Patriotic 
 XRP Big 🎒's Only!
 Investor💵📈📉 🪙
-🛠Jack Of All Trades🗽
+🛠Jack Of All Trades🗽#
                 </p>
                 <a
                   href="/"
