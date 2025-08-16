@@ -17,9 +17,15 @@ import { useEffect, useId, useRef, useState } from "react";
 
 const tiles = [
   {
-    icon: <HeartHandshake className="size-full" />,
+    icon: (
+      <img
+        src="/monwhooperlogo.png"
+        alt="Monwhooper wolf"
+        className="size-full object-contain"
+      />
+    ),
     bg: (
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-orange-600 via-rose-600 to-violet-600 opacity-70 blur-[20px] filter"></div>
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-orange-600 via-rose-600 to-violet-600 opacity-70 blur-[20px] filter" />
     ),
   },
   {
