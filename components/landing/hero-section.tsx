@@ -34,8 +34,7 @@ export default function HeroSection() {
   style={{ fontFamily: "Wednesday" }}
 >
   How WE can STAY DANGEROUS in life
-  DANGEROUS ALONE DEADLIEST WHEN TOGETHER
-  <br className="hidden md:block" /> nvestor in | 🧠 Self | 🪬 Health | 🪙💰 Wealth
+  <br className="hidden md:block" /> DANGEROUS ALONE DEADLIEST WHEN TOGETHER
 </p>
       <Button className="translate-y-[-1rem] animate-fade-in gap-1 rounded-lg text-white dark:text-black opacity-0 ease-in-out [--animation-delay:600ms]">
         <span>Get Started for free </span>
