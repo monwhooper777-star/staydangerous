@@ -140,10 +140,13 @@ export default function CallToActionSection() {
               </div>
               <div className="z-10 mt-4 flex flex-col items-center text-center text-primary">
                 <h1 className="text-3xl font-bold lg:text-4xl">
-                  Stop wasting time on design.
+                Monwhooper Amazing 1776.
                 </h1>
                 <p className="mt-2">
-                  Start your 7-day free trial. No credit card required.
+                Keep 🇺🇸 Patriotic 
+XRP Big 🎒's Only!
+Investor💵📈📉 🪙
+🛠Jack Of All Trades🗽
                 </p>
                 <a
                   href="/"
