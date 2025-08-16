@@ -108,9 +108,14 @@ export function SiteHeader() {
 </Link>
 
           <div className="ml-auto flex h-full items-center">
-            <Link className="mr-6 text-sm" href="/signin">
-              Log in
-            </Link>
+          <Link
+  href="https://calendar.app.google/eZRfTzmqzdqT8UFk7"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="mr-6 text-sm rounded-md px-3 py-1.5 font-medium text-white bg-[#ff3131] hover:bg-[#e02b2b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff3131]"
+>
+  Get Kangen®
+</Link>
             <Link
               className={cn(
                 buttonVariants({ variant: "secondary" }),
