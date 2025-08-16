@@ -36,10 +36,19 @@ export default function HeroSection() {
 Welcome to monwhoopers repository of health, wealth & self. 
   <br className="hidden md:block" /> Stay Dangerous.
 </p>
-      <Button className="translate-y-[-1rem] animate-fade-in gap-1 rounded-lg text-white dark:text-black opacity-0 ease-in-out [--animation-delay:600ms]">
-        <span>Get Started for free </span>
-        <ArrowRightIcon className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
-      </Button>
+<Button
+  asChild
+  className="group translate-y-[-1rem] animate-fade-in gap-1 rounded-lg text-white dark:text-black opacity-0 ease-in-out [--animation-delay:600ms]"
+>
+  <a
+    href="https://calendar.app.google/eZRfTzmqzdqT8UFk7"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <span>Book Your Kangen Call®</span>
+    <ArrowRightIcon className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
+  </a>
+</Button>
       <div
         ref={ref}
         className="relative mt-[8rem] animate-fade-up opacity-0 [--animation-delay:400ms] [perspective:2000px] after:absolute after:inset-0 after:z-50 after:[background:linear-gradient(to_top,var(--background)_30%,transparent)]"
