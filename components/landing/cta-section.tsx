@@ -16,15 +16,9 @@ const WolfIcon = (
   />
 );
 
-/** Keep colorful halos; same icon everywhere */
-const halos = [
-  "from-orange-600 via-rose-600 to-violet-600",
-  "from-cyan-500 via-blue-500 to-indigo-500",
-  "from-green-500 via-teal-500 to-emerald-600",
-  "from-yellow-400 via-orange-500 to-yellow-600",
-  "from-orange-600 via-rose-600 to-violet-600",
-  "from-gray-600 via-gray-500 to-gray-400",
-];
+const halos = Array(6).fill(
+  "from-[var(--color-one)] via-[#b91c1c] to-[var(--color-two)]"
+);
 
 type Tile = { icon: JSX.Element; bg: JSX.Element };
 
