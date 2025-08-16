@@ -74,7 +74,7 @@ export function SiteFooter() {
           <div className="mb-12 flex-col flex gap-4">
             <Link href="/" className="flex items-center gap-2">
             <img
-  src="/footerlogo.png"
+  src="/monwhooperlogo.png"
   alt="Monwhooper Footer Logo"
   className="h-12 w-auto object-contain"
 />
