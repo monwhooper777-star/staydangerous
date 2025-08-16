@@ -156,8 +156,8 @@
   --input: oklch(90% 0 0);
   --ring: oklch(15% 0 0);
 
-  --color-one: oklch(83% 0.12 65); /* #ffbd7a */
-  --color-two: oklch(72% 0.15 340); /* #fe8bbb */
+  --color-one: #8B0000; /* #ffbd7a */
+  --color-two: #FF2400; /* #fe8bbb */
   --color-three: oklch(65% 0.18 280); /* #9e7aff */
   /* 
   --color-one: oklch(85% 0.15 165); /* #37ecba */
