@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const footerNavs = [
   {
-    label: "Product",
+    label: "Menu",
     items: [
       {
         href: "/",
@@ -11,11 +11,11 @@ const footerNavs = [
       },
       {
         href: "/pricing",
-        name: "Pricing",
+        name: "Kangen Water®",
       },
       {
         href: "/faq",
-        name: "FAQ",
+        name: "Monwhooper Philosophy",
       },
     ],
   },
