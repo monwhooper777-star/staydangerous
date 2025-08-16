@@ -167,9 +167,13 @@ export default function CallToActionSection() {
               ))}
             </Marquee>
             <div className="absolute z-10">
-              <div className="mx-auto size-24 rounded-[2rem] border bg-background/10 p-3 shadow-2xl backdrop-blur-md dark:bg-background/10 lg:size-32">
-                <HeartHandshake className="mx-auto size-16 text-foreground dark:text-foreground lg:size-24" />
-              </div>
+            <div className="mx-auto size-24 rounded-[2rem] border bg-background/10 p-3 shadow-2xl backdrop-blur-md dark:bg-background/10 lg:size-32">
+  <img
+    src="/monwhooperlogo.png"
+    alt="Monwhooper wolf"
+    className="mx-auto size-16 lg:size-24 object-contain"
+  />
+</div>
               <div className="z-10 mt-4 flex flex-col items-center text-center text-primary">
                 <h1 className="text-3xl font-bold lg:text-4xl">
                   Stop wasting time on design.
