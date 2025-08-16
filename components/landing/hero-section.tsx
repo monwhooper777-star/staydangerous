@@ -67,12 +67,12 @@ export default function HeroSection() {
           />
 
           <img
-            src="/Stay Dangerous hero.png"
+            src="/SDhero.png"
             alt="Hero Image"
             className="hidden relative w-full h-full rounded-[inherit] border object-contain dark:block"
           />
           <img
-            src="/Stay Dangerous hero.png"
+            src="/SDhero.png"
             alt="Hero Image"
             className="block relative w-full h-full  rounded-[inherit] border object-contain dark:hidden"
           />
