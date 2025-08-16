@@ -33,8 +33,8 @@ export default function HeroSection() {
   className="mb-12 text-lg tracking-tight text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]"
   style={{ fontFamily: "Wednesday" }}
 >
-Welcome to monwhoopers repository of health, wealth  
-  <br className="hidden md:block" /> & self.
+Welcome to Monwhoopers repository of Health, Wealth  
+  <br className="hidden md:block" /> & Self.
 </p>
 <Button
   asChild
@@ -45,7 +45,7 @@ Welcome to monwhoopers repository of health, wealth
     target="_blank"
     rel="noopener noreferrer"
   >
-    <span>Book Your Kangen Call®</span>
+    <span>Book Your Kangen® Call</span>
     <ArrowRightIcon className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
   </a>
 </Button>
