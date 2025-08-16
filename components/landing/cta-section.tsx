@@ -16,9 +16,8 @@ const WolfIcon = (
   />
 );
 
-const halos = Array(6).fill(
-  "from-[var(--color-one)] via-[#b91c1c] to-[var(--color-two)]"
-);
+const halos = Array(6).fill("from-red-950 via-red-900 to-red-800");
+
 
 type Tile = { icon: JSX.Element; bg: JSX.Element };
 
