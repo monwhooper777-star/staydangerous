@@ -23,8 +23,8 @@ export default function HeroSection() {
         </TextShimmer>
       </div>
       <h1
-  className="bg-gradient-to-br dark:from-white from-black from-30% dark:to-white/40 to-black/40 bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent text-balance sm:text-6xl md:text-7xl lg:text-8xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]"
-  style={{ fontFamily: "Wednesday" }}
+  className="bg-gradient-to-br dark:from-white from-black from-30% dark:to-white/40 to-black/40 bg-clip-text py-6 text-5xl font-normal leading-none tracking-tighter text-transparent text-balance sm:text-6xl md:text-7xl lg:text-8xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]"
+  style={{ fontFamily: "Gotha" }}
 >
   Monwhooper
   <br className="hidden md:block" /> Stay Dangerous.
