@@ -1,6 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* ------------------ CUSTOM FONT ------------------ */
+@font-face {
+  font-family: "Wednesday";
+  src: url("/fonts/Quotex.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+/* ------------------------------------------------- */
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
