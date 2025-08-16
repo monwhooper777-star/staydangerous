@@ -30,9 +30,9 @@ export default function HeroSection() {
   <br className="hidden md:block" /> Stay Dangerous.
 </h1>
       <p className="mb-12 text-lg tracking-tight text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
-        Beautifully designed, animated components and templates built with
-        <br className="hidden md:block" /> Tailwind CSS, React, and Framer
-        Motion.
+      How WE can STAY DANGEROUS in life
+      DANGEROUS ALONE DEADLIEST WHEN TOGETHER
+        <br className="hidden md:block" /> nvestor in|🧠 Self |🪬Health |🪙💰 Wealth
       </p>
       <Button className="translate-y-[-1rem] animate-fade-in gap-1 rounded-lg text-white dark:text-black opacity-0 ease-in-out [--animation-delay:600ms]">
         <span>Get Started for free </span>
