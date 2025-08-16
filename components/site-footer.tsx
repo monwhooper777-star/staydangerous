@@ -82,7 +82,7 @@ export function SiteFooter() {
     Monwhooper
   </span>
 </Link>
-            <p className="max-w-xs">Stay Dangerous</p>
+            <p className="max-w-xs">Stay Dangerous | Health, Wealth & Self</p>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:gap-10 sm:grid-cols-3">
             {footerNavs.map((nav) => (
