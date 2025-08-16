@@ -25,15 +25,7 @@ const footerNavs = [
     items: [
       {
         href: "/",
-        name: "Discord",
-      },
-      {
-        href: "/",
-        name: "Twitter",
-      },
-      {
-        href: "mailto:hello@chatcollect.com",
-        name: "Email",
+        name: "WakeWaterCo™",
       },
     ],
   },
