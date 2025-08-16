@@ -10,6 +10,16 @@
 }
 /* ------------------------------------------------- */
 
+/* --- CUSTOM FONT: Gotha --- */
+@font-face {
+  font-family: "Gotha";
+  src: url("/Dx%20Gotha%20-%20Free%20Personal.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+.gotha { font-family: "Gotha", serif; }
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
