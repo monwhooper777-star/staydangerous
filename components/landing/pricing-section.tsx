@@ -610,4 +610,31 @@ const PlayingCard: React.FC<PlayingCardProps> = ({
   );
 };
 
-export default PlayingCard;
+"use client";
+
+import React from "react";
+import Image from "next/image";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import * as THREE from "three";
+
+// … all your hook code, shader code, PlayingCard component, etc …
+
+// ❌ remove this:
+// export default PlayingCard;
+
+// ✅ replace with this wrapper:
+export default function PricingSection() {
+  return (
+    <section id="pricing" className="py-24">
+      <PlayingCard
+        imageSrc="/xrp.png"
+        textArray={["D","E","F","A","U","L","T"]}
+        minWidth={320}
+        maxWidth={1200}
+        minTextSize={18}
+        maxTextSize={44}
+        onCardClicked={() => {}}
+      />
+    </section>
+  );
+}
