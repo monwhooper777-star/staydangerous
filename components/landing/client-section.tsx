@@ -25,12 +25,13 @@ export default function ClientSection() {
     className="h-20 w-auto px-2 object-contain"
   />
 </li>
-              <li>
-                <img
-                  src={`https://cdn.magicui.design/companies/GitHub.svg`}
-                  className="h-8 w-28 px-2 dark:brightness-0 dark:invert"
-                />
-              </li>
+<li className="flex items-center">
+  <img
+    src="/enagic.png"
+    alt="Enagic"
+    className="h-20 w-auto px-2 object-contain"
+  />
+</li>
 
               <li>
                 <img
