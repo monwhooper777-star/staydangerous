@@ -12,10 +12,11 @@ export default function ClientSection() {
           <div className="mt-6">
             <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-16 [&_path]:fill-white">
               <li>
-                <img
-                  src={`https://cdn.magicui.design/companies/Google.svg`}
-                  className="h-8 w-28 px-2 dark:brightness-0 dark:invert"
-                />
+              <img
+  src="/wakewaterco.png"
+  alt="Wake Water Co"
+  className="h-8 w-28 px-2 dark:brightness-0 dark:invert"
+/>
               </li>
               <li>
                 <img
