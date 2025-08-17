@@ -7,42 +7,30 @@ export default function ClientSection() {
       <div className="py-14">
         <div className="mx-auto max-w-screen-xl px-4 md:px-8">
           <h2 className="text-center text-sm font-semibold text-gray-600">
-          Investments & Associations
+            Investments &amp; Associations
           </h2>
-          <div className="mt-6">
-            <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-16 [&_path]:fill-white">
-            <li className="flex items-center">
-  <img
-    src="/wakewaterco.png"
-    alt="Wake Water Co"
-    className="h-20 w-auto px-2 object-contain"
-  />
-</li>
-<li className="flex items-center">
-  <img
-    src="/xrp.png"
-    alt="XRP"
-    className="h-20 w-auto px-2 object-contain"
-  />
-</li>
-<li className="flex items-center">
-  <img
-    src="/enagic.png"
-    alt="Enagic"
-    className="h-20 w-auto px-2 object-contain"
-  />
-</li>
 
-              <li>
+          <div className="mt-10">
+            <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+              <li className="flex items-center">
                 <img
-                  src={`https://cdn.magicui.design/companies/Uber.svg`}
-                  className="h-8 w-28 px-2 dark:brightness-0 dark:invert"
+                  src="/wakewaterco.png"
+                  alt="Wake Water Co"
+                  className="h-20 w-auto object-contain"
                 />
               </li>
-              <li>
+              <li className="flex items-center">
                 <img
-                  src={`https://cdn.magicui.design/companies/Notion.svg`}
-                  className="h-8 w-28 px-2 dark:brightness-0 dark:invert"
+                  src="/xrp.png"
+                  alt="XRP"
+                  className="h-20 w-auto object-contain"
+                />
+              </li>
+              <li className="flex items-center">
+                <img
+                  src="/enagic.png"
+                  alt="Enagic"
+                  className="h-20 w-auto object-contain"
                 />
               </li>
             </ul>
