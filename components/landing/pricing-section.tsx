@@ -610,12 +610,7 @@ const PlayingCard: React.FC<PlayingCardProps> = ({
   );
 };
 
-"use client";
 
-import React from "react";
-import Image from "next/image";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import * as THREE from "three";
 
 // … all your hook code, shader code, PlayingCard component, etc …
 
