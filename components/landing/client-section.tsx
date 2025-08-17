@@ -15,7 +15,7 @@ export default function ClientSection() {
   <img
     src="/wakewaterco.png"
     alt="Wake Water Co"
-    className="h-10 w-auto px-2 object-contain"
+    className="h-20 w-auto px-2 object-contain"
   />
 </li>
               <li>
