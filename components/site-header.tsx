@@ -116,15 +116,14 @@ export function SiteHeader() {
 >
   Get Kangen®
 </Link>
-            <Link
-              className={cn(
-                buttonVariants({ variant: "secondary" }),
-                "mr-6 text-sm"
-              )}
-              href="/signup"
-            >
-              Sign up
-            </Link>
+<Link
+  href="https://wakewaterco.com/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="mr-6 text-sm rounded-md px-3 py-1.5 font-medium bg-white text-black"
+>
+  WakeWaterCo™
+</Link>
           </div>
           <button
             className="ml-6 md:hidden"
