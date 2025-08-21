@@ -114,7 +114,7 @@ export function SiteHeader() {
   rel="noopener noreferrer"
   className="mr-6 text-sm rounded-md px-3 py-1.5 font-medium text-white bg-[#ff3131] hover:bg-[#e02b2b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff3131]"
 >
-  Get Kangen®
+  Kangen®
 </Link>
 <Link
   href="https://wakewaterco.com/"
