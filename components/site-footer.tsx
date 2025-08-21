@@ -1,4 +1,5 @@
-import { DiscordLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
+import { TwitterLogoIcon } from "@radix-ui/react-icons";
+import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 
 const footerNavs = [
@@ -47,9 +48,9 @@ const footerNavs = [
 
 const footerSocials = [
   {
-    href: "",
-    name: "Discord",
-    icon: <DiscordLogoIcon className="h-4 w-4" />,
+    href: "https://www.instagram.com/monwhooper_amazing1776/",
+    name: "Instagram",
+    icon: <FaInstagram className="h-4 w-4" />,
   },
   {
     href: "https://x.com/MonwhooperA1776",
