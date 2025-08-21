@@ -25,7 +25,7 @@ const footerNavs = [
     label: "Community",
     items: [
       {
-        href: "/",
+        href: "https://wakewaterco.com/",
         name: "WakeWaterCo™",
       },
     ],
