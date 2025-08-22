@@ -15,7 +15,7 @@ const footerNavs = [
         name: "Kangen Water®",
       },
       {
-        href: "/faq",
+        href: "/philosophy",
         name: "Monwhooper Philosophy",
       },
     ],
