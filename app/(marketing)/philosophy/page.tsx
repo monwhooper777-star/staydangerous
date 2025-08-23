@@ -5,15 +5,17 @@ export const metadata = {
 
 export default function PhilosophyPage() {
   return (
-    <main className="px-4 sm:px-6">
+    <main className="px-4 sm:px-6 pt-[calc(env(safe-area-inset-top)+4rem)] sm:pt-[calc(env(safe-area-inset-top)+5rem)]">
       <article className="mx-auto w-full max-w-[68ch]">
         <header className="mb-6 sm:mb-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-tight">
+          <h1 className="scroll-mt-28 md:scroll-mt-32 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-tight">
             Samurai & Wolf Philosophy
           </h1>
           <p className="mt-2 text-sm sm:text-base text-muted-foreground">
             Honor. Loyalty. Instinct. Courage. Freedom.
           </p>
+          {/* Divider */}
+          <hr className="mt-4 border-t border-neutral-700/40" />
         </header>
 
         <section className="space-y-4 text-base sm:text-lg leading-relaxed hyphens-auto break-words">
