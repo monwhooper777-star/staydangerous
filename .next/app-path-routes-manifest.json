@@ -1,9 +1,0 @@
-{
-  "/_not-found/page": "/_not-found",
-  "/favicon.ico/route": "/favicon.ico",
-  "/(auth)/signin/page": "/signin",
-  "/(auth)/login/page": "/login",
-  "/(auth)/signup/page": "/signup",
-  "/philosophy/page": "/philosophy",
-  "/(marketing)/page": "/"
-}
