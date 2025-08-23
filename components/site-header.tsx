@@ -148,9 +148,13 @@ export function SiteHeader() {
           )}
         >
           <div className="container mx-auto flex h-[var(--navigation-height)] items-center justify-between">
-            <Link className="text-md flex items-center" href="/">
-              Magic UI
-            </Link>
+          <Link className="flex items-center justify-center" href="/" aria-label="Monwhooper Home">
+  <img
+    src="/monwhooperlogo.png"
+    alt="Monwhooper Logo"
+    className="h-8 w-auto"
+  />
+</Link>
 
             <button
               className="ml-6 md:hidden"
