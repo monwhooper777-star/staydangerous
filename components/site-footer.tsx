@@ -7,7 +7,7 @@ const footerNavs = [
     label: "Menu",
     items: [
       {
-        href: "/",
+        href: "/email-collection",
         name: "Email Collection",
       },
       {
