@@ -61,12 +61,15 @@ function Globe({
     }
   };
 
-  const onRender = useCallback((state: Record<string, any>) => {
-    if (!pointerInteracting.current) phi += 0.005;
-    state.phi = phi + r;
-    state.width = width * 2;
-    state.height = width * 2;
-  }, [r]);
+  const onRender = useCallback(
+    (state: Record<string, any>) => {
+      if (!pointerInteracting.current) phi += 0.005;
+      state.phi = phi + r;
+      state.width = width * 2;
+      state.height = width * 2;
+    },
+    [r]
+  );
 
   const onResize = () => {
     if (canvasRef.current) width = canvasRef.current.offsetWidth;
@@ -91,15 +94,26 @@ function Globe({
   }, [config, onRender]);
 
   return (
-    <div className={cn("absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]", className)}>
+    <div
+      className={cn(
+        "absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]",
+        className
+      )}
+    >
       <canvas
         ref={canvasRef}
         className="size-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
-        onPointerDown={(e) => updatePointerInteraction(e.clientX - pointerInteractionMovement.current)}
+        onPointerDown={(e) =>
+          updatePointerInteraction(
+            e.clientX - pointerInteractionMovement.current
+          )
+        }
         onPointerUp={() => updatePointerInteraction(null)}
         onPointerOut={() => updatePointerInteraction(null)}
         onMouseMove={(e) => updateMovement(e.clientX)}
-        onTouchMove={(e) => e.touches[0] && updateMovement(e.touches[0].clientX)}
+        onTouchMove={(e) =>
+          e.touches[0] && updateMovement(e.touches[0].clientX)
+        }
       />
     </div>
   );
@@ -109,14 +123,20 @@ export default function KangenHero() {
   return (
     <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-background px-6 py-16 overflow-hidden">
       <div className="relative z-10 text-center w-full max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-16 tracking-tight">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight">
           Learn about{" "}
           <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-800 bg-clip-text text-transparent">
             Kangen Water®
           </span>
         </h1>
 
-        <div className="relative h-[400px] md:h-[500px] lg:h-[600px] w-full max-w-[600px] mx-auto">
+        {/* New Subheading */}
+        <p className="mt-4 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          Find out why there are people all over the world sharing a specific kind
+          of electrochemically activated water.
+        </p>
+
+        <div className="relative mt-12 h-[400px] md:h-[500px] lg:h-[600px] w-full max-w-[600px] mx-auto">
           <Globe className="top-0" />
           {/* subtle fade at bottom of globe */}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
