@@ -8,26 +8,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const menuItem = [
-  {
-    id: 1,
-    label: "Features",
-    href: "/features",
-  },
-  {
-    id: 2,
-    label: "Pricing",
-    href: "#",
-  },
-  {
-    id: 3,
-    label: "Careers",
-    href: "#",
-  },
-  {
-    id: 4,
-    label: "Contact Us",
-    href: "#",
-  },
+  { id: 1, label: "Email Collection", href: "/email-collection" },
+  { id: 2, label: "Kangen Water®", href: "/kangen-water" },
+  { id: 3, label: "Monwhooper Philosophy", href: "/philosophy" },
+  { id: 4, label: "WakeWaterCo™", href: "https://wakewaterco.com/", external: true },
 ];
 
 export function SiteHeader() {
@@ -171,21 +155,34 @@ export function SiteHeader() {
             animate={hamburgerMenuIsOpen ? "open" : "exit"}
           >
             {menuItem.map((item) => (
-              <motion.li
-                variants={mobileLinkVar}
-                key={item.id}
-                className="border-grey-dark pl-6 py-0.5 border-b md:border-none"
-              >
-                <Link
-                  className={`hover:text-grey flex h-[var(--navigation-height)] w-full items-center text-xl transition-[color,transform] duration-300 md:translate-y-0 md:text-sm md:transition-colors ${
-                    hamburgerMenuIsOpen ? "[&_a]:translate-y-0" : ""
-                  }`}
-                  href={item.href}
-                >
-                  {item.label}
-                </Link>
-              </motion.li>
-            ))}
+  <motion.li
+    variants={mobileLinkVar}
+    key={item.id}
+    className="border-grey-dark pl-6 py-0.5 border-b md:border-none"
+  >
+    {item.external ? (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`hover:text-grey flex h-[var(--navigation-height)] w-full items-center text-xl transition-[color,transform] duration-300 md:translate-y-0 md:text-sm md:transition-colors ${
+          hamburgerMenuIsOpen ? "[&_a]:translate-y-0" : ""
+        }`}
+      >
+        {item.label}
+      </a>
+    ) : (
+      <Link
+        href={item.href}
+        className={`hover:text-grey flex h-[var(--navigation-height)] w-full items-center text-xl transition-[color,transform] duration-300 md:translate-y-0 md:text-sm md:transition-colors ${
+          hamburgerMenuIsOpen ? "[&_a]:translate-y-0" : ""
+        }`}
+      >
+        {item.label}
+      </Link>
+    )}
+  </motion.li>
+))}
           </motion.ul>
         </motion.nav>
       </AnimatePresence>
