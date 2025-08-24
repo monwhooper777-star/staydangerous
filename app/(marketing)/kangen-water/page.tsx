@@ -1,7 +1,7 @@
 // app/(marketing)/kangen-water/page.tsx
 
 import KangenHero from "@/components/kangen-hero";
-import HeroVideoDialog from "@/components/magiciui/hero-video-dialog"; // uses your existing dialog
+import HeroVideoDialog from "@/components/magicui/hero-video-dialog";
 
 export const metadata = {
   title: "Kangen Water® — Samurai & Wolf",
