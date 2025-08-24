@@ -31,7 +31,7 @@ function GlowEffect({
 }: GlowEffectProps) {
   const BASE_TRANSITION = { repeat: Infinity, duration, ease: 'linear' };
 
-  // Mutable record to satisfy framer-motion typing
+  // framer types: use a mutable record
   const animations: Record<NonNullable<GlowEffectProps['mode']>, any> = {
     rotate: {
       background: [
@@ -254,7 +254,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
     e.preventDefault();
     if (!email) return;
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500)); // replace with POST /api/subscribe
+    await new Promise((resolve) => setTimeout(resolve, 1500)); // replace with real POST
     onSubmit?.(email);
     setIsSubmitted(true);
     setIsLoading(false);
@@ -287,7 +287,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
     <div className="relative z-0 min-h-[70vh] bg-background flex flex-col items-center justify-center overflow-hidden pt-12 md:pt-16 pb-16 md:pb-20">
       <BackgroundBeams />
 
-      {/* Soft glows */}
+      {/* soft glows */}
       <div className="pointer-events-none absolute top-10 left-10 w-56 h-56 opacity-20">
         <GlowEffect colors={['#3b82f6', '#8b5cf6', '#06b6d4']} mode="pulse" blur="strong" scale={0.7} duration={4} />
       </div>
@@ -309,51 +309,47 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
         </BoxReveal>
 
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.4} className="mt-6">
-          {/* Perfect centering on mobile: both elements share the same max width */}
+          {/* PERFECT CENTERING */}
           <form onSubmit={handleSubmit} className="w-full">
-            <div
-              className="
-                mx-auto grid w-full grid-cols-1 gap-3 justify-items-center
-                max-w-[520px]
-                sm:max-w-none sm:grid-cols-[minmax(320px,420px)_auto] sm:justify-center
-              "
-            >
-              <div className="relative w-full max-w-[360px] sm:max-w-none sm:w-[380px]">
-                <Label htmlFor="email" className="sr-only">Email address</Label>
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <EnhancedInput
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  aria-label="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={placeholder}
-                  required
-                  className="pl-10"
-                  disabled={isLoading}
-                />
-              </div>
+            <div className="mx-auto w-full max-w-[520px]">
+              <div className="flex flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:items-center sm:justify-center">
+                <div className="relative w-full sm:w-[420px]">
+                  <Label htmlFor="email" className="sr-only">Email address</Label>
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <EnhancedInput
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    aria-label="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={placeholder}
+                    required
+                    className="pl-10"
+                    disabled={isLoading}
+                  />
+                </div>
 
-              <Button
-                type="submit"
-                disabled={isLoading || !email}
-                className="h-12 w-full max-w-[360px] sm:max-w-none sm:w-auto px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
-              >
-                {isLoading ? (
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                    <span>Joining...</span>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4" />
-                    <span>{buttonText}</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                )}
-                <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-              </Button>
+                <Button
+                  type="submit"
+                  disabled={isLoading || !email}
+                  className="h-12 w-full sm:w-auto px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+                >
+                  {isLoading ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                      <span>Joining...</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4" />
+                      <span>{buttonText}</span>
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  )}
+                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+                </Button>
+              </div>
             </div>
           </form>
         </BoxReveal>
