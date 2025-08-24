@@ -27,7 +27,7 @@ export default function PhilosophyPage() {
             Stay Dangerous - Health, Wealth &amp; Self.
           </p>
           <p className="mt-4 text-base sm:text-lg leading-relaxed">
-            When I was changing my Instagram username a few year back, I put my first and last name in a WU-TANG name generator and boom 💥 birth Monwhooper. Amazing, I added 1776 for my patriotism.
+            When I was changing my Instagram username a few years back, I put my first and last name in a WU-TANG name generator and boom 💥 birth Monwhooper. Amazing, I added 1776 for my patriotism.
           </p>
           {/* Divider */}
           <hr className="mt-6 border-t border-neutral-700/40" />
