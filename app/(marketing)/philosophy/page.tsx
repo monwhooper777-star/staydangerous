@@ -18,6 +18,21 @@ export default function PhilosophyPage() {
           <hr className="mt-4 border-t border-neutral-700/40" />
         </header>
 
+        {/* New Section: Origins of Personal Brand */}
+        <section className="mb-10">
+          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+            Origins of Personal Brand Monwhooper &amp; a brief introduction to the Owner.
+          </h2>
+          <p className="mt-2 text-base sm:text-lg text-muted-foreground">
+            Stay Dangerous - Health, Wealth &amp; Self.
+          </p>
+          <p className="mt-4 text-base sm:text-lg leading-relaxed">
+            When I was changing my Instagram username a few year back, I put my first and last name in a WU-TANG name generator and boom 💥 birth Monwhooper. Amazing, I added 1776 for my patriotism.
+          </p>
+          {/* Divider */}
+          <hr className="mt-6 border-t border-neutral-700/40" />
+        </section>
+
         <section className="space-y-4 text-base sm:text-lg leading-relaxed hyphens-auto break-words">
           <p>
             I'll tell you a bit of my obsession with Japanese culture, the samurai code, and honor.
