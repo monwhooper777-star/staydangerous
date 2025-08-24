@@ -1,4 +1,5 @@
 import KangenHero from "@/components/kangen-hero";
+import KangenVideo from "@/components/ui/kangen-video";
 
 export const metadata = {
   title: "Kangen Water® — Samurai & Wolf",
