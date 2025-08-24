@@ -31,7 +31,8 @@ function GlowEffect({
 }: GlowEffectProps) {
   const BASE_TRANSITION = { repeat: Infinity, duration, ease: 'linear' };
 
-  const animations = {
+  // Use a mutable record + cast to satisfy framer-motion's animate typing
+  const animations: Record<NonNullable<GlowEffectProps['mode']>, any> = {
     rotate: {
       background: [
         `conic-gradient(from 0deg at 50% 50%, ${colors.join(', ')})`,
@@ -65,7 +66,7 @@ function GlowEffect({
       transition: { ...BASE_TRANSITION, repeatType: 'mirror' },
     },
     static: { background: `linear-gradient(to right, ${colors.join(', ')})` },
-  } as const;
+  };
 
   const getBlurClass = (b: GlowEffectProps['blur']) => {
     if (typeof b === 'number') return `blur-[${b}px]`;
@@ -84,8 +85,13 @@ function GlowEffect({
   return (
     <motion.div
       style={{ ...style, '--scale': scale, willChange: 'transform', backfaceVisibility: 'hidden' } as React.CSSProperties}
-      animate={animations[mode]}
-      className={cn('pointer-events-none absolute inset-0 h-full w-full', 'scale-[var(--scale)] transform-gpu', getBlurClass(blur), className)}
+      animate={animations[mode] as any}
+      className={cn(
+        'pointer-events-none absolute inset-0 h-full w-full',
+        'scale-[var(--scale)] transform-gpu',
+        getBlurClass(blur),
+        className
+      )}
     />
   );
 }
@@ -163,7 +169,7 @@ const EnhancedInput = memo(
         <Input
           type={type}
           className={cn(
-            "flex h-10 w-full rounded-md border-none bg-gray-50 px-3 py-2 text-sm text-black transition duration-400 group-hover/input:shadow-none file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-400 focus-visible:ring-[2px] focus-visible:ring-neutral-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-800 dark:text-white dark:shadow-[0px_0px_1px_1px_#404040] dark:focus-visible:ring-neutral-600",
+            "flex h-12 w-full rounded-md border-none bg-gray-50 px-3 py-2 text-base text-black transition duration-400 group-hover/input:shadow-none file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-400 focus-visible:ring-[2px] focus-visible:ring-neutral-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-800 dark:text-white dark:shadow-[0px_0px_1px_1px_#404040] dark:focus-visible:ring-neutral-600",
             className
           )}
           ref={ref}
@@ -256,52 +262,56 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
     setIsLoading(false);
   };
 
+  // Success state
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-background relative flex flex-col items-center justify-center antialiased overflow-hidden">
+      <div className="min-h-[60vh] bg-background relative flex flex-col items-center justify-center antialiased overflow-hidden">
         <BackgroundBeams />
-        <div className="max-w-2xl mx-auto p-4 relative z-10">
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full mb-6">
-              <Check className="w-8 h-8 text-green-600 dark:text-green-400" />
+        <div className="mx-auto w-full max-w-xl md:max-w-2xl px-6 md:px-8 relative z-10">
+          <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.35 }} className="text-center">
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-green-100 dark:bg-green-900/20 rounded-full mb-4">
+              <Check className="w-7 h-7 text-green-600 dark:text-green-400" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-4">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-[1.08] bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-2">
               You're all set!
             </h1>
-            <p className="text-muted-foreground max-w-lg mx-auto text-lg">{successMessage}</p>
+            <p className="text-muted-foreground max-w-prose mx-auto text-base md:text-lg leading-7">
+              {successMessage}
+            </p>
           </motion.div>
         </div>
       </div>
     );
   }
 
+  // Default state
   return (
-    <div className="min-h-screen bg-background relative flex flex-col items-center justify-center antialiased overflow-hidden">
+    <div className="min-h-[70vh] bg-background relative flex flex-col items-center justify-center antialiased overflow-hidden">
       <BackgroundBeams />
 
-      {/* Glow effects */}
-      <div className="absolute top-20 left-20 w-72 h-72 opacity-30">
-        <GlowEffect colors={['#3b82f6', '#8b5cf6', '#06b6d4']} mode="pulse" blur="strong" scale={0.8} duration={4} />
+      {/* Softer glows */}
+      <div className="pointer-events-none absolute top-10 left-10 w-56 h-56 opacity-20">
+        <GlowEffect colors={['#3b82f6', '#8b5cf6', '#06b6d4']} mode="pulse" blur="strong" scale={0.7} duration={4} />
       </div>
-      <div className="absolute bottom-20 right-20 w-96 h-96 opacity-20">
-        <GlowEffect colors={['#f59e0b', '#ef4444', '#ec4899']} mode="breathe" blur="stronger" scale={0.6} duration={6} />
+      <div className="pointer-events-none absolute bottom-12 right-10 w-64 h-64 opacity-15">
+        <GlowEffect colors={['#f59e0b', '#ef4444', '#ec4899']} mode="breathe" blur="stronger" scale={0.55} duration={6} />
       </div>
 
-      <div className="max-w-2xl mx-auto p-4 relative z-10">
-        <BoxReveal boxColor="hsl(var(--primary))" duration={0.5}>
-          <h1 className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground text-center mb-6">
+      <div className="mx-auto w-full max-w-xl md:max-w-2xl px-6 md:px-8 relative z-10">
+        <BoxReveal boxColor="hsl(var(--primary))" duration={0.4}>
+          <h1 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-3">
             {title}
           </h1>
         </BoxReveal>
 
-        <BoxReveal boxColor="hsl(var(--primary))" duration={0.5}>
-          <p className="text-muted-foreground max-w-lg mx-auto my-6 text-sm md:text-base text-center leading-relaxed">
+        <BoxReveal boxColor="hsl(var(--primary))" duration={0.4}>
+          <p className="text-center text-muted-foreground max-w-prose mx-auto mt-2 text-base md:text-lg leading-7">
             {subtitle}
           </p>
         </BoxReveal>
 
-        <BoxReveal boxColor="hsl(var(--primary))" duration={0.5} className="mt-8">
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+        <BoxReveal boxColor="hsl(var(--primary))" duration={0.4} className="mt-6">
+          <form className="flex w-full flex-col sm:flex-row gap-3 max-w-lg mx-auto" onSubmit={handleSubmit}>
             <div className="flex-1">
               <Label htmlFor="email" className="sr-only">Email address</Label>
               <div className="relative">
@@ -322,7 +332,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
             <Button
               type="submit"
               disabled={isLoading || !email}
-              className="group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+              className="h-12 px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
             >
               {isLoading ? (
                 <div className="flex items-center gap-2">
@@ -336,13 +346,13 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+              <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
             </Button>
           </form>
         </BoxReveal>
 
-        <BoxReveal boxColor="hsl(var(--primary))" duration={0.5}>
-          <p className="text-xs text-muted-foreground text-center mt-6">
+        <BoxReveal boxColor="hsl(var(--primary))" duration={0.4}>
+          <p className="text-xs text-muted-foreground text-center mt-4">
             By signing up, you agree to our{' '}
             <a href="#" className="underline hover:text-primary transition-colors">Terms of Service</a>{' '}
             and{' '}
