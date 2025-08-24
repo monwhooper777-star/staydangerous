@@ -8,8 +8,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-// GlowEffect Component
-export type GlowEffectProps = {
+/* ------------------------------- GlowEffect ------------------------------- */
+
+type GlowEffectProps = {
   className?: string;
   style?: React.CSSProperties;
   colors?: string[];
@@ -19,7 +20,7 @@ export type GlowEffectProps = {
   duration?: number;
 };
 
-export function GlowEffect({
+function GlowEffect({
   className,
   style,
   colors = ['#FF5733', '#33FF57', '#3357FF', '#F1C40F'],
@@ -28,11 +29,7 @@ export function GlowEffect({
   scale = 1,
   duration = 5,
 }: GlowEffectProps) {
-  const BASE_TRANSITION = {
-    repeat: Infinity,
-    duration: duration,
-    ease: 'linear',
-  };
+  const BASE_TRANSITION = { repeat: Infinity, duration, ease: 'linear' };
 
   const animations = {
     rotate: {
@@ -43,60 +40,35 @@ export function GlowEffect({
       transition: BASE_TRANSITION,
     },
     pulse: {
-      background: colors.map(
-        (color) =>
-          `radial-gradient(circle at 50% 50%, ${color} 0%, transparent 100%)`
-      ),
+      background: colors.map((c) => `radial-gradient(circle at 50% 50%, ${c} 0%, transparent 100%)`),
       scale: [1 * scale, 1.1 * scale, 1 * scale],
       opacity: [0.5, 0.8, 0.5],
-      transition: {
-        ...BASE_TRANSITION,
-        repeatType: 'mirror',
-      },
+      transition: { ...BASE_TRANSITION, repeatType: 'mirror' },
     },
     breathe: {
-      background: [
-        ...colors.map(
-          (color) =>
-            `radial-gradient(circle at 50% 50%, ${color} 0%, transparent 100%)`
-        ),
-      ],
+      background: colors.map((c) => `radial-gradient(circle at 50% 50%, ${c} 0%, transparent 100%)`),
       scale: [1 * scale, 1.05 * scale, 1 * scale],
-      transition: {
-        ...BASE_TRANSITION,
-        repeatType: 'mirror',
-      },
+      transition: { ...BASE_TRANSITION, repeatType: 'mirror' },
     },
     colorShift: {
-      background: colors.map((color, index) => {
-        const nextColor = colors[(index + 1) % colors.length];
-        return `conic-gradient(from 0deg at 50% 50%, ${color} 0%, ${nextColor} 50%, ${color} 100%)`;
+      background: colors.map((color, i) => {
+        const next = colors[(i + 1) % colors.length];
+        return `conic-gradient(from 0deg at 50% 50%, ${color} 0%, ${next} 50%, ${color} 100%)`;
       }),
-      transition: {
-        ...BASE_TRANSITION,
-        repeatType: 'mirror',
-      },
+      transition: { ...BASE_TRANSITION, repeatType: 'mirror' },
     },
     flowHorizontal: {
       background: colors.map((color) => {
-        const nextColor = colors[(colors.indexOf(color) + 1) % colors.length];
-        return `linear-gradient(to right, ${color}, ${nextColor})`;
+        const next = colors[(colors.indexOf(color) + 1) % colors.length];
+        return `linear-gradient(to right, ${color}, ${next})`;
       }),
-      transition: {
-        ...BASE_TRANSITION,
-        repeatType: 'mirror',
-      },
+      transition: { ...BASE_TRANSITION, repeatType: 'mirror' },
     },
-    static: {
-      background: `linear-gradient(to right, ${colors.join(', ')})`,
-    },
-  };
+    static: { background: `linear-gradient(to right, ${colors.join(', ')})` },
+  } as const;
 
-  const getBlurClass = (blur: GlowEffectProps['blur']) => {
-    if (typeof blur === 'number') {
-      return `blur-[${blur}px]`;
-    }
-
+  const getBlurClass = (b: GlowEffectProps['blur']) => {
+    if (typeof b === 'number') return `blur-[${b}px]`;
     const presets = {
       softest: 'blur-sm',
       soft: 'blur',
@@ -106,157 +78,104 @@ export function GlowEffect({
       strongest: 'blur-xl',
       none: 'blur-none',
     };
-
-    return presets[blur as keyof typeof presets];
+    return presets[b as keyof typeof presets];
   };
 
   return (
     <motion.div
-      style={
-        {
-          ...style,
-          '--scale': scale,
-          willChange: 'transform',
-          backfaceVisibility: 'hidden',
-        } as React.CSSProperties
-      }
+      style={{ ...style, '--scale': scale, willChange: 'transform', backfaceVisibility: 'hidden' } as React.CSSProperties}
       animate={animations[mode]}
-      className={cn(
-        'pointer-events-none absolute inset-0 h-full w-full',
-        'scale-[var(--scale)] transform-gpu',
-        getBlurClass(blur),
-        className
-      )}
+      className={cn('pointer-events-none absolute inset-0 h-full w-full', 'scale-[var(--scale)] transform-gpu', getBlurClass(blur), className)}
     />
   );
 }
 
-// BackgroundBeams Component
-export const BackgroundBeams = memo(
-  ({ className }: { className?: string }) => {
-    const paths = [
-      "M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875",
-      "M-373 -197C-373 -197 -305 208 159 335C623 462 691 867 691 867",
-      "M-366 -205C-366 -205 -298 200 166 327C630 454 698 859 698 859",
-      "M-359 -213C-359 -213 -291 192 173 319C637 446 705 851 705 851",
-      "M-352 -221C-352 -221 -284 184 180 311C644 438 712 843 712 843",
-    ];
+/* ---------------------------- BackgroundBeams ----------------------------- */
 
-    return (
-      <div
-        className={cn(
-          "absolute h-full w-full inset-0 [mask-size:40px] [mask-repeat:no-repeat] flex items-center justify-center",
-          className,
-        )}
-      >
-        <svg
-          className="z-0 h-full w-full pointer-events-none absolute"
-          width="100%"
-          height="100%"
-          viewBox="0 0 696 316"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {paths.map((path, index) => (
-            <motion.path
-              key={`path-${index}`}
-              d={path}
-              stroke={`url(#linearGradient-${index})`}
-              strokeOpacity="0.4"
-              strokeWidth="0.5"
-            />
+const BackgroundBeams = memo(({ className }: { className?: string }) => {
+  const paths = [
+    "M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875",
+    "M-373 -197C-373 -197 -305 208 159 335C623 462 691 867 691 867",
+    "M-366 -205C-366 -205 -298 200 166 327C630 454 698 859 698 859",
+    "M-359 -213C-359 -213 -291 192 173 319C637 446 705 851 705 851",
+    "M-352 -221C-352 -221 -284 184 180 311C644 438 712 843 712 843",
+  ];
+
+  return (
+    <div className={cn("absolute h-full w-full inset-0 [mask-size:40px] [mask-repeat:no-repeat] flex items-center justify-center", className)}>
+      <svg className="z-0 h-full w-full pointer-events-none absolute" width="100%" height="100%" viewBox="0 0 696 316" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {paths.map((path, index) => (
+          <motion.path key={`path-${index}`} d={path} stroke={`url(#linearGradient-${index})`} strokeOpacity="0.4" strokeWidth="0.5" />
+        ))}
+        <defs>
+          {paths.map((_, index) => (
+            <motion.linearGradient
+              id={`linearGradient-${index}`}
+              key={`gradient-${index}`}
+              initial={{ x1: "0%", x2: "0%", y1: "0%", y2: "0%" }}
+              animate={{ x1: ["0%", "100%"], x2: ["0%", "95%"], y1: ["0%", "100%"], y2: ["0%", `${93 + Math.random() * 8}%`] }}
+              transition={{ duration: Math.random() * 10 + 10, ease: "easeInOut", repeat: Infinity, delay: Math.random() * 10 }}
+            >
+              <stop stopColor="#18CCFC" stopOpacity="0" />
+              <stop stopColor="#18CCFC" />
+              <stop offset="32.5%" stopColor="#6344F5" />
+              <stop offset="100%" stopColor="#AE48FF" stopOpacity="0" />
+            </motion.linearGradient>
           ))}
-          <defs>
-            {paths.map((path, index) => (
-              <motion.linearGradient
-                id={`linearGradient-${index}`}
-                key={`gradient-${index}`}
-                initial={{
-                  x1: "0%",
-                  x2: "0%",
-                  y1: "0%",
-                  y2: "0%",
-                }}
-                animate={{
-                  x1: ["0%", "100%"],
-                  x2: ["0%", "95%"],
-                  y1: ["0%", "100%"],
-                  y2: ["0%", `${93 + Math.random() * 8}%`],
-                }}
-                transition={{
-                  duration: Math.random() * 10 + 10,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                  delay: Math.random() * 10,
-                }}
-              >
-                <stop stopColor="#18CCFC" stopOpacity="0" />
-                <stop stopColor="#18CCFC" />
-                <stop offset="32.5%" stopColor="#6344F5" />
-                <stop offset="100%" stopColor="#AE48FF" stopOpacity="0" />
-              </motion.linearGradient>
-            ))}
-          </defs>
-        </svg>
-      </div>
-    );
-  }
-);
-
+        </defs>
+      </svg>
+    </div>
+  );
+});
 BackgroundBeams.displayName = "BackgroundBeams";
 
-// Enhanced Input Component with glow effect
+/* ------------------------------ EnhancedInput ----------------------------- */
+
 const EnhancedInput = memo(
-  forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
-    function EnhancedInput({ className, type, ...props }, ref) {
-      const radius = 100;
-      const [visible, setVisible] = useState(false);
+  forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(function EnhancedInput({ className, type, ...props }, ref) {
+    const radius = 100;
+    const [visible, setVisible] = useState(false);
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
 
-      const mouseX = useMotionValue(0);
-      const mouseY = useMotionValue(0);
-
-      function handleMouseMove({
-        currentTarget,
-        clientX,
-        clientY,
-      }: React.MouseEvent<HTMLDivElement>) {
-        const { left, top } = currentTarget.getBoundingClientRect();
-        mouseX.set(clientX - left);
-        mouseY.set(clientY - top);
-      }
-
-      return (
-        <motion.div
-          style={{
-            background: useMotionTemplate`
-              radial-gradient(
-                ${visible ? radius + 'px' : '0px'} circle at ${mouseX}px ${mouseY}px,
-                #3b82f6,
-                transparent 80%
-              )
-            `,
-          }}
-          onMouseMove={handleMouseMove}
-          onMouseEnter={() => setVisible(true)}
-          onMouseLeave={() => setVisible(false)}
-          className="group/input rounded-lg p-[2px] transition duration-300"
-        >
-          <input
-            type={type}
-            className={cn(
-              "flex h-10 w-full rounded-md border-none bg-gray-50 px-3 py-2 text-sm text-black transition duration-400 group-hover/input:shadow-none file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-400 focus-visible:ring-[2px] focus-visible:ring-neutral-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-800 dark:text-white dark:shadow-[0px_0px_1px_1px_#404040] dark:focus-visible:ring-neutral-600",
-              className
-            )}
-            ref={ref}
-            {...props}
-          />
-        </motion.div>
-      );
+    function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent<HTMLDivElement>) {
+      const { left, top } = currentTarget.getBoundingClientRect();
+      mouseX.set(clientX - left);
+      mouseY.set(clientY - top);
     }
-  )
+
+    return (
+      <motion.div
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              ${visible ? radius + 'px' : '0px'} circle at ${mouseX}px ${mouseY}px,
+              #3b82f6,
+              transparent 80%
+            )
+          `,
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setVisible(true)}
+        onMouseLeave={() => setVisible(false)}
+        className="group/input rounded-lg p-[2px] transition duration-300"
+      >
+        <Input
+          type={type}
+          className={cn(
+            "flex h-10 w-full rounded-md border-none bg-gray-50 px-3 py-2 text-sm text-black transition duration-400 group-hover/input:shadow-none file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-400 focus-visible:ring-[2px] focus-visible:ring-neutral-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-800 dark:text-white dark:shadow-[0px_0px_1px_1px_#404040] dark:focus-visible:ring-neutral-600",
+            className
+          )}
+          ref={ref}
+          {...props}
+        />
+      </motion.div>
+    );
+  })
 );
 
-// BoxReveal Component
+/* -------------------------------- BoxReveal ------------------------------- */
+
 type BoxRevealProps = {
   children: React.ReactNode;
   width?: string;
@@ -265,13 +184,7 @@ type BoxRevealProps = {
   className?: string;
 };
 
-const BoxReveal = memo(function BoxReveal({
-  children,
-  width = 'fit-content',
-  boxColor,
-  duration,
-  className,
-}: BoxRevealProps) {
+const BoxReveal = memo(function BoxReveal({ children, width = 'fit-content', boxColor, duration, className }: BoxRevealProps) {
   const mainControls = useAnimation();
   const slideControls = useAnimation();
   const ref = useRef(null);
@@ -288,20 +201,9 @@ const BoxReveal = memo(function BoxReveal({
   }, [isInView, mainControls, slideControls]);
 
   return (
-    <section
-      ref={ref}
-      style={{
-        position: 'relative',
-        width,
-        overflow: 'hidden',
-      }}
-      className={className}
-    >
+    <section ref={ref} style={{ position: 'relative', width, overflow: 'hidden' }} className={className}>
       <motion.div
-        variants={{
-          hidden: { opacity: 0, y: 75 },
-          visible: { opacity: 1, y: 0 },
-        }}
+        variants={{ hidden: { opacity: 0, y: 75 }, visible: { opacity: 1, y: 0 } }}
         initial="hidden"
         animate={mainControls}
         transition={{ duration: duration ?? 0.5, delay: 0.25 }}
@@ -313,22 +215,14 @@ const BoxReveal = memo(function BoxReveal({
         initial="hidden"
         animate={slideControls}
         transition={{ duration: duration ?? 0.5, ease: 'easeIn' }}
-        style={{
-          position: 'absolute',
-          top: 4,
-          bottom: 4,
-          left: 0,
-          right: 0,
-          zIndex: 20,
-          background: boxColor ?? '#5046e6',
-          borderRadius: 4,
-        }}
+        style={{ position: 'absolute', top: 4, bottom: 4, left: 0, right: 0, zIndex: 20, background: boxColor ?? '#5046e6', borderRadius: 4 }}
       />
     </section>
   );
 });
 
-// Main Email Signup Component
+/* ------------------------------- EmailSignup ------------------------------ */
+
 interface EmailSignupProps {
   title?: string;
   subtitle?: string;
@@ -339,13 +233,13 @@ interface EmailSignupProps {
 }
 
 const EmailSignup: React.FC<EmailSignupProps> = ({
-    title = "Monwhoopers Email List",
-    subtitle = "Stay up to date with Monwhoopers content pertaining to Health, Wealth & Self.",
-    placeholder = "Enter your email address",
-    buttonText = "Get Access",
-    successMessage = "Thanks! We'll be in touch soon.",
-    onSubmit,
-  }) => {
+  title = "Monwhoopers Email List",
+  subtitle = "Stay up to date with Monwhoopers content pertaining to Health, Wealth & Self.",
+  placeholder = "Enter your email address",
+  buttonText = "Get Access",
+  successMessage = "Thanks! We'll be in touch soon.",
+  onSubmit,
+}) => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -355,14 +249,9 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
     if (!email) return;
 
     setIsLoading(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    if (onSubmit) {
-      onSubmit(email);
-    }
-    
+    // TODO: replace with POST /api/subscribe
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    onSubmit?.(email);
     setIsSubmitted(true);
     setIsLoading(false);
   };
@@ -372,21 +261,14 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
       <div className="min-h-screen bg-background relative flex flex-col items-center justify-center antialiased overflow-hidden">
         <BackgroundBeams />
         <div className="max-w-2xl mx-auto p-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-          >
+          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full mb-6">
               <Check className="w-8 h-8 text-green-600 dark:text-green-400" />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-4">
               You're all set!
             </h1>
-            <p className="text-muted-foreground max-w-lg mx-auto text-lg">
-              {successMessage}
-            </p>
+            <p className="text-muted-foreground max-w-lg mx-auto text-lg">{successMessage}</p>
           </motion.div>
         </div>
       </div>
@@ -396,26 +278,13 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
   return (
     <div className="min-h-screen bg-background relative flex flex-col items-center justify-center antialiased overflow-hidden">
       <BackgroundBeams />
-      
+
       {/* Glow effects */}
       <div className="absolute top-20 left-20 w-72 h-72 opacity-30">
-        <GlowEffect
-          colors={['#3b82f6', '#8b5cf6', '#06b6d4']}
-          mode="pulse"
-          blur="strong"
-          scale={0.8}
-          duration={4}
-        />
+        <GlowEffect colors={['#3b82f6', '#8b5cf6', '#06b6d4']} mode="pulse" blur="strong" scale={0.8} duration={4} />
       </div>
-      
       <div className="absolute bottom-20 right-20 w-96 h-96 opacity-20">
-        <GlowEffect
-          colors={['#f59e0b', '#ef4444', '#ec4899']}
-          mode="breathe"
-          blur="stronger"
-          scale={0.6}
-          duration={6}
-        />
+        <GlowEffect colors={['#f59e0b', '#ef4444', '#ec4899']} mode="breathe" blur="stronger" scale={0.6} duration={6} />
       </div>
 
       <div className="max-w-2xl mx-auto p-4 relative z-10">
@@ -424,7 +293,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
             {title}
           </h1>
         </BoxReveal>
-        
+
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.5}>
           <p className="text-muted-foreground max-w-lg mx-auto my-6 text-sm md:text-base text-center leading-relaxed">
             {subtitle}
@@ -434,9 +303,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.5} className="mt-8">
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <div className="flex-1">
-              <Label htmlFor="email" className="sr-only">
-                Email address
-              </Label>
+              <Label htmlFor="email" className="sr-only">Email address</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <EnhancedInput
@@ -451,7 +318,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
                 />
               </div>
             </div>
-            
+
             <Button
               type="submit"
               disabled={isLoading || !email}
@@ -469,7 +336,6 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>
               )}
-              
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
             </Button>
           </form>
@@ -478,14 +344,9 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.5}>
           <p className="text-xs text-muted-foreground text-center mt-6">
             By signing up, you agree to our{' '}
-            <a href="#" className="underline hover:text-primary transition-colors">
-              Terms of Service
-            </a>{' '}
+            <a href="#" className="underline hover:text-primary transition-colors">Terms of Service</a>{' '}
             and{' '}
-            <a href="#" className="underline hover:text-primary transition-colors">
-              Privacy Policy
-            </a>
-            .
+            <a href="#" className="underline hover:text-primary transition-colors">Privacy Policy</a>.
           </p>
         </BoxReveal>
       </div>
@@ -493,18 +354,20 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
   );
 };
 
-// Demo Component
+/* ---------------------------- Page: default export ---------------------------- */
+
 export default function EmailCollectionPage() {
-    const handleEmailSubmit = (email: string) => {
-      console.log('Email submitted:', email);
-    };
-    return (
-      <EmailSignup
-        title="Monwhoopers Email List"
-        subtitle="Stay up to date with Monwhoopers content pertaining to Health, Wealth & Self."
-        buttonText="Get Access"
-        placeholder="Enter your email address"
-        onSubmit={handleEmailSubmit}
-      />
-    );
-  }
+  const handleEmailSubmit = (email: string) => {
+    console.log('Email submitted:', email);
+  };
+
+  return (
+    <EmailSignup
+      title="Monwhoopers Email List"
+      subtitle="Stay up to date with Monwhoopers content pertaining to Health, Wealth & Self."
+      buttonText="Get Access"
+      placeholder="Enter your email address"
+      onSubmit={handleEmailSubmit}
+    />
+  );
+}
