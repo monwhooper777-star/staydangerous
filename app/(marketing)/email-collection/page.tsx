@@ -31,6 +31,7 @@ function GlowEffect({
 }: GlowEffectProps) {
   const BASE_TRANSITION = { repeat: Infinity, duration, ease: 'linear' };
 
+  // Mutable record to satisfy framer-motion typing
   const animations: Record<NonNullable<GlowEffectProps['mode']>, any> = {
     rotate: {
       background: [
@@ -253,8 +254,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
     e.preventDefault();
     if (!email) return;
     setIsLoading(true);
-    // TODO: replace with POST /api/subscribe
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1500)); // replace with POST /api/subscribe
     onSubmit?.(email);
     setIsSubmitted(true);
     setIsLoading(false);
@@ -287,7 +287,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
     <div className="relative z-0 min-h-[70vh] bg-background flex flex-col items-center justify-center overflow-hidden pt-12 md:pt-16 pb-16 md:pb-20">
       <BackgroundBeams />
 
-      {/* Softer glows */}
+      {/* Soft glows */}
       <div className="pointer-events-none absolute top-10 left-10 w-56 h-56 opacity-20">
         <GlowEffect colors={['#3b82f6', '#8b5cf6', '#06b6d4']} mode="pulse" blur="strong" scale={0.7} duration={4} />
       </div>
@@ -295,7 +295,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
         <GlowEffect colors={['#f59e0b', '#ef4444', '#ec4899']} mode="breathe" blur="stronger" scale={0.55} duration={6} />
       </div>
 
-      <div className="mx-auto w-full max-w-xl md:max-w-2xl px-6 md:px-8 relative z-10">
+      <div className="mx-auto w-full max-w-3xl px-4 sm:px-6 relative z-10">
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.4}>
           <h1 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-3">
             {title}
@@ -309,16 +309,16 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
         </BoxReveal>
 
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.4} className="mt-6">
-          {/* Center the input + button perfectly on mobile; row on desktop */}
+          {/* Perfect centering: grid with centered tracks */}
           <form onSubmit={handleSubmit} className="w-full">
             <div
               className="
-                mx-auto grid w-full gap-3 justify-items-center
-                [grid-template-columns:1fr]
-                sm:grid-cols-[minmax(260px,360px)_auto]
+                mx-auto grid w-full max-w-[520px] grid-cols-1 gap-3
+                justify-items-stretch
+                sm:max-w-none sm:grid-cols-[minmax(320px,420px)_auto] sm:justify-center
               "
             >
-              <div className="relative w-[min(92vw,420px)] sm:w-[360px]">
+              <div className="relative w-full">
                 <Label htmlFor="email" className="sr-only">Email address</Label>
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <EnhancedInput
@@ -338,12 +338,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
               <Button
                 type="submit"
                 disabled={isLoading || !email}
-                className="
-                  h-12 w-[min(92vw,420px)] sm:w-auto px-5
-                  group relative overflow-hidden
-                  bg-primary text-primary-foreground hover:bg-primary/90
-                  transition-all duration-300
-                "
+                className="h-12 w-full sm:w-auto px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">
