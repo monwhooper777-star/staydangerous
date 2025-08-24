@@ -1,4 +1,6 @@
-import KangenHero from "@/components/kangen-hero"
+import dynamic from "next/dynamic";
+// Client-only import so SSR doesn't interfere
+const KangenHero = dynamic(() => import("@/components/kangen-hero"), { ssr: false });
 
 
 export const metadata = {
