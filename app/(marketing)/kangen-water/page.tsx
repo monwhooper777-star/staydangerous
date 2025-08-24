@@ -1,4 +1,4 @@
-
+import KangenHero from "@/components/kangen-hero"
 
 
 export const metadata = {
