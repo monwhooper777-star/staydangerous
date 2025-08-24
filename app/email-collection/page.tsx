@@ -339,13 +339,13 @@ interface EmailSignupProps {
 }
 
 const EmailSignup: React.FC<EmailSignupProps> = ({
-  title = "Join the waitlist",
-  subtitle = "Welcome to MailJet, the best transactional email service on the web. We provide reliable, scalable, and customizable email solutions for your business.",
-  placeholder = "Enter your email address",
-  buttonText = "Get Early Access",
-  successMessage = "Thanks! We'll be in touch soon.",
-  onSubmit,
-}) => {
+    title = "Monwhoopers Email List",
+    subtitle = "Stay up to date with Monwhoopers content pertaining to Health, Wealth & Self.",
+    placeholder = "Enter your email address",
+    buttonText = "Get Access",
+    successMessage = "Thanks! We'll be in touch soon.",
+    onSubmit,
+  }) => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -494,19 +494,17 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
 };
 
 // Demo Component
-export default function EmailSignupDemo() {
-  const handleEmailSubmit = (email: string) => {
-    console.log('Email submitted:', email);
-  };
-
-  return (
-    <EmailSignup
-      title="Join the waitlist"
-      subtitle="Welcome to MailJet, the best transactional email service on the web. We provide reliable, scalable, and customizable email solutions for your business. Whether you're sending order confirmations, password reset emails, or promotional campaigns, MailJet has got you covered."
-      placeholder="hi@manuarora.in"
-      buttonText="Get Early Access"
-      successMessage="Thanks! We'll be in touch soon."
-      onSubmit={handleEmailSubmit}
-    />
-  );
-}
+export default function EmailCollectionPage() {
+    const handleEmailSubmit = (email: string) => {
+      console.log('Email submitted:', email);
+    };
+    return (
+      <EmailSignup
+        title="Monwhoopers Email List"
+        subtitle="Stay up to date with Monwhoopers content pertaining to Health, Wealth & Self."
+        buttonText="Get Access"
+        placeholder="Enter your email address"
+        onSubmit={handleEmailSubmit}
+      />
+    );
+  }
