@@ -309,16 +309,16 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
         </BoxReveal>
 
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.4} className="mt-6">
-          {/* Perfect centering: grid with centered tracks */}
+          {/* Perfect centering on mobile: both elements share the same max width */}
           <form onSubmit={handleSubmit} className="w-full">
             <div
               className="
-                mx-auto grid w-full max-w-[520px] grid-cols-1 gap-3
-                justify-items-stretch
-                sm:max-w-none sm:grid-cols-[minmax(320px,420px)_auto] sm:justify-center sm:items-center
+                mx-auto grid w-full grid-cols-1 gap-3 justify-items-center
+                max-w-[520px]
+                sm:max-w-none sm:grid-cols-[minmax(320px,420px)_auto] sm:justify-center
               "
             >
-              <div className="relative w-full">
+              <div className="relative w-full max-w-[360px] sm:max-w-none sm:w-[380px]">
                 <Label htmlFor="email" className="sr-only">Email address</Label>
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <EnhancedInput
@@ -338,7 +338,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
               <Button
                 type="submit"
                 disabled={isLoading || !email}
-                className="h-12 w-full sm:w-auto px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+                className="h-12 w-full max-w-[360px] sm:max-w-none sm:w-auto px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">
