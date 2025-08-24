@@ -1,6 +1,3 @@
-mkdir -p components/ui
-
-cat > 'components/ui/card.tsx' <<'TSX'
 "use client";
 
 import * as React from "react";
@@ -53,4 +50,3 @@ export const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<
 CardFooter.displayName = "CardFooter";
 
 export default Card;
-TSX
