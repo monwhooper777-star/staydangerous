@@ -31,7 +31,7 @@ function GlowEffect({
 }: GlowEffectProps) {
   const BASE_TRANSITION = { repeat: Infinity, duration, ease: 'linear' };
 
-  // Use a mutable record + cast to satisfy framer-motion's animate typing
+  // mutable record to satisfy framer-motion typings
   const animations: Record<NonNullable<GlowEffectProps['mode']>, any> = {
     rotate: {
       background: [
@@ -108,8 +108,8 @@ const BackgroundBeams = memo(({ className }: { className?: string }) => {
   ];
 
   return (
-    <div className={cn("absolute h-full w-full inset-0 [mask-size:40px] [mask-repeat:no-repeat] flex items-center justify-center", className)}>
-      <svg className="z-0 h-full w-full pointer-events-none absolute" width="100%" height="100%" viewBox="0 0 696 316" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div className={cn("absolute inset-0 h-full w-full [mask-size:40px] [mask-repeat:no-repeat] flex items-center justify-center z-0", className)}>
+      <svg className="pointer-events-none absolute z-0 h-full w-full" width="100%" height="100%" viewBox="0 0 696 316" fill="none" xmlns="http://www.w3.org/2000/svg">
         {paths.map((path, index) => (
           <motion.path key={`path-${index}`} d={path} stroke={`url(#linearGradient-${index})`} strokeOpacity="0.4" strokeWidth="0.5" />
         ))}
@@ -250,10 +250,9 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email) return;
-
     setIsLoading(true);
     // TODO: replace with POST /api/subscribe
     await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -265,7 +264,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
   // Success state
   if (isSubmitted) {
     return (
-      <div className="min-h-[60vh] bg-background relative flex flex-col items-center justify-center antialiased overflow-hidden">
+      <div className="relative z-0 min-h-[60vh] bg-background flex flex-col items-center justify-center overflow-hidden pt-12 md:pt-16 pb-16 md:pb-20">
         <BackgroundBeams />
         <div className="mx-auto w-full max-w-xl md:max-w-2xl px-6 md:px-8 relative z-10">
           <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.35 }} className="text-center">
@@ -286,7 +285,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
 
   // Default state
   return (
-    <div className="min-h-[70vh] bg-background relative flex flex-col items-center justify-center antialiased overflow-hidden">
+    <div className="relative z-0 min-h-[70vh] bg-background flex flex-col items-center justify-center overflow-hidden pt-12 md:pt-16 pb-16 md:pb-20">
       <BackgroundBeams />
 
       {/* Softer glows */}
@@ -311,28 +310,35 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
         </BoxReveal>
 
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.4} className="mt-6">
-          <form className="flex w-full flex-col sm:flex-row gap-3 max-w-lg mx-auto" onSubmit={handleSubmit}>
-            <div className="flex-1">
+          <form
+            onSubmit={handleSubmit}
+            className="
+              mx-auto w-full
+              grid max-w-lg grid-cols-1 gap-3
+              sm:max-w-xl sm:grid-cols-[minmax(260px,1fr)_auto] sm:items-center
+            "
+          >
+            <div className="relative">
               <Label htmlFor="email" className="sr-only">Email address</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <EnhancedInput
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={placeholder}
-                  required
-                  className="pl-10"
-                  disabled={isLoading}
-                />
-              </div>
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <EnhancedInput
+                id="email"
+                type="email"
+                autoComplete="email"
+                aria-label="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={placeholder}
+                required
+                className="pl-10"
+                disabled={isLoading}
+              />
             </div>
 
             <Button
               type="submit"
               disabled={isLoading || !email}
-              className="h-12 px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+              className="h-12 w-full sm:w-auto px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
             >
               {isLoading ? (
                 <div className="flex items-center gap-2">
