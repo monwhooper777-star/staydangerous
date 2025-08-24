@@ -11,7 +11,7 @@ const footerNavs = [
         name: "Email Collection",
       },
       {
-        href: "/pricing",
+        href: "/kangen-water",
         name: "Kangen Water®",
       },
       {
