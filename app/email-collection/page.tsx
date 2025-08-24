@@ -31,7 +31,6 @@ function GlowEffect({
 }: GlowEffectProps) {
   const BASE_TRANSITION = { repeat: Infinity, duration, ease: 'linear' };
 
-  // mutable record to satisfy framer-motion typings
   const animations: Record<NonNullable<GlowEffectProps['mode']>, any> = {
     rotate: {
       background: [
@@ -310,50 +309,46 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
         </BoxReveal>
 
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.4} className="mt-6">
-          <form
-            onSubmit={handleSubmit}
-            className="
-              mx-auto w-full
-              grid max-w-lg grid-cols-1 gap-3
-              sm:max-w-xl sm:grid-cols-[minmax(260px,1fr)_auto] sm:items-center
-            "
-          >
-            <div className="relative">
-              <Label htmlFor="email" className="sr-only">Email address</Label>
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <EnhancedInput
-                id="email"
-                type="email"
-                autoComplete="email"
-                aria-label="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={placeholder}
-                required
-                className="pl-10"
-                disabled={isLoading}
-              />
-            </div>
+          {/* Centered as a single unit */}
+          <form onSubmit={handleSubmit} className="w-full">
+            <div className="mx-auto w-full sm:w-fit flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-center">
+              <div className="relative w-full sm:w-[360px]">
+                <Label htmlFor="email" className="sr-only">Email address</Label>
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <EnhancedInput
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  aria-label="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={placeholder}
+                  required
+                  className="pl-10"
+                  disabled={isLoading}
+                />
+              </div>
 
-            <Button
-              type="submit"
-              disabled={isLoading || !email}
-              className="h-12 w-full sm:w-auto px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
-            >
-              {isLoading ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                  <span>Joining...</span>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4" />
-                  <span>{buttonText}</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              )}
-              <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-            </Button>
+              <Button
+                type="submit"
+                disabled={isLoading || !email}
+                className="h-12 w-full sm:w-auto px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+              >
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                    <span>Joining...</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4" />
+                    <span>{buttonText}</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                )}
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+              </Button>
+            </div>
           </form>
         </BoxReveal>
 
