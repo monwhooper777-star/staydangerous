@@ -309,9 +309,9 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
         </BoxReveal>
 
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.4} className="mt-6">
-          {/* Centered as a single unit */}
+          {/* Center the input+button as a single unit on all screens */}
           <form onSubmit={handleSubmit} className="w-full">
-            <div className="mx-auto w-full sm:w-fit flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-center">
+            <div className="mx-auto flex w-full max-w-[420px] flex-col gap-3 sm:max-w-none sm:w-fit sm:flex-row sm:items-center sm:justify-center">
               <div className="relative w-full sm:w-[360px]">
                 <Label htmlFor="email" className="sr-only">Email address</Label>
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
