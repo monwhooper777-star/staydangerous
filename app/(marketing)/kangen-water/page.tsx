@@ -17,8 +17,8 @@ export default function KangenWaterPage() {
       {/* Video */}
       <section className="mx-auto w-full max-w-5xl mt-10">
         <HeroVideoDialog
-          videoSrc="/kangen-water.mp4"   // <-- /public/kangen-water.mp4
-          thumbnailSrc="/enagic.png"     // <-- in /public (from your tree)
+          videoSrc="/kangen-water.mp4"          // ✅ your video
+          thumbnailSrc="/monwhooperthumbnail.png" // ✅ new thumbnail in /public
           thumbnailAlt="Kangen Water teaser"
         />
       </section>
@@ -46,13 +46,6 @@ export default function KangenWaterPage() {
           </p>
         </section>
       </article>
-
-      {/*
-      Debug fallback (remove once confirmed):
-      <section className="mx-auto w-full max-w-5xl mt-10">
-        <video src="/kangen-water.mp4" controls playsInline preload="metadata" className="w-full rounded-xl" />
-      </section>
-      */}
     </main>
   );
 }
