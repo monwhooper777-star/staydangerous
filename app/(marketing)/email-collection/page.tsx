@@ -315,7 +315,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
               className="
                 mx-auto grid w-full max-w-[520px] grid-cols-1 gap-3
                 justify-items-stretch
-                sm:max-w-none sm:grid-cols-[minmax(320px,420px)_auto] sm:justify-center
+                sm:max-w-none sm:grid-cols-[minmax(320px,420px)_auto] sm:justify-center sm:items-center
               "
             >
               <div className="relative w-full">
