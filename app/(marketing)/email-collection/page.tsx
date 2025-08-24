@@ -30,8 +30,6 @@ function GlowEffect({
   duration = 5,
 }: GlowEffectProps) {
   const BASE_TRANSITION = { repeat: Infinity, duration, ease: 'linear' };
-
-  // framer types: use a mutable record
   const animations: Record<NonNullable<GlowEffectProps['mode']>, any> = {
     rotate: {
       background: [
@@ -254,7 +252,7 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
     e.preventDefault();
     if (!email) return;
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500)); // replace with real POST
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     onSubmit?.(email);
     setIsSubmitted(true);
     setIsLoading(false);
@@ -309,11 +307,12 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
         </BoxReveal>
 
         <BoxReveal boxColor="hsl(var(--primary))" duration={0.4} className="mt-6">
-          {/* PERFECT CENTERING */}
+          {/* PERFECT, HARD CENTERING */}
           <form onSubmit={handleSubmit} className="w-full">
-            <div className="mx-auto w-full max-w-[520px]">
-              <div className="flex flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:items-center sm:justify-center">
-                <div className="relative w-full sm:w-[420px]">
+            <div className="grid place-items-center w-full">
+              {/* unified track for input & button */}
+              <div className="w-[min(92vw,520px)]">
+                <div className="relative">
                   <Label htmlFor="email" className="sr-only">Email address</Label>
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <EnhancedInput
@@ -329,7 +328,10 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
                     disabled={isLoading}
                   />
                 </div>
+              </div>
 
+              {/* button shares the exact same track */}
+              <div className="w-[min(92vw,520px)] sm:w-auto sm:mt-0 mt-3">
                 <Button
                   type="submit"
                   disabled={isLoading || !email}
