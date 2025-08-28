@@ -178,53 +178,6 @@ const EnhancedInput = memo(
   })
 );
 
-/* -------------------------------- BoxReveal ------------------------------- */
-
-type BoxRevealProps = {
-  children: React.ReactNode;
-  width?: string;
-  boxColor?: string;
-  duration?: number;
-  className?: string;
-};
-
-const BoxReveal = memo(function BoxReveal({ children, width = 'fit-content', boxColor, duration, className }: BoxRevealProps) {
-  const mainControls = useAnimation();
-  const slideControls = useAnimation();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (isInView) {
-      slideControls.start('visible');
-      mainControls.start('visible');
-    } else {
-      slideControls.start('hidden');
-      mainControls.start('hidden');
-    }
-  }, [isInView, mainControls, slideControls]);
-
-  return (
-    <section ref={ref} style={{ position: 'relative', width, overflow: 'hidden' }} className={className}>
-      <motion.div
-        variants={{ hidden: { opacity: 0, y: 75 }, visible: { opacity: 1, y: 0 } }}
-        initial="hidden"
-        animate={mainControls}
-        transition={{ duration: duration ?? 0.5, delay: 0.25 }}
-      >
-        {children}
-      </motion.div>
-      <motion.div
-        variants={{ hidden: { left: 0 }, visible: { left: '100%' } }}
-        initial="hidden"
-        animate={slideControls}
-        transition={{ duration: duration ?? 0.5, ease: 'easeIn' }}
-        style={{ position: 'absolute', top: 4, bottom: 4, left: 0, right: 0, zIndex: 20, background: boxColor ?? '#5046e6', borderRadius: 4 }}
-      />
-    </section>
-  );
-});
-
 /* ------------------------------- EmailSignup ------------------------------ */
 
 interface EmailSignupProps {
@@ -242,7 +195,6 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
   placeholder = "Enter your email address",
   buttonText = "Get Access",
   successMessage = "Thanks! We'll be in touch soon.",
-  onSubmit,
 }) => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -252,10 +204,25 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
     e.preventDefault();
     if (!email) return;
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    onSubmit?.(email);
-    setIsSubmitted(true);
-    setIsLoading(false);
+
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        setIsSubmitted(true);
+      } else {
+        alert("Something went wrong. Try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error sending email.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Success state
@@ -285,85 +252,58 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
     <div className="relative z-0 min-h-[70vh] bg-background flex flex-col items-center justify-center overflow-hidden pt-12 md:pt-16 pb-16 md:pb-20">
       <BackgroundBeams />
 
-      {/* soft glows */}
-      <div className="pointer-events-none absolute top-10 left-10 w-56 h-56 opacity-20">
-        <GlowEffect colors={['#3b82f6', '#8b5cf6', '#06b6d4']} mode="pulse" blur="strong" scale={0.7} duration={4} />
-      </div>
-      <div className="pointer-events-none absolute bottom-12 right-10 w-64 h-64 opacity-15">
-        <GlowEffect colors={['#f59e0b', '#ef4444', '#ec4899']} mode="breathe" blur="stronger" scale={0.55} duration={6} />
-      </div>
-
       <div className="mx-auto w-full max-w-3xl px-4 sm:px-6 relative z-10">
-        <BoxReveal boxColor="hsl(var(--primary))" duration={0.4}>
-          <h1 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-3">
-            {title}
-          </h1>
-        </BoxReveal>
-
-        <BoxReveal boxColor="hsl(var(--primary))" duration={0.4}>
-          <p className="text-center text-muted-foreground max-w-prose mx-auto mt-2 text-base md:text-lg leading-7">
-            {subtitle}
-          </p>
-        </BoxReveal>
-
-        <BoxReveal boxColor="hsl(var(--primary))" duration={0.4} className="mt-6">
-          {/* PERFECT, HARD CENTERING */}
-          <form onSubmit={handleSubmit} className="w-full">
-            <div className="grid place-items-center w-full">
-              {/* unified track for input & button */}
-              <div className="w-[min(92vw,520px)]">
-                <div className="relative">
-                  <Label htmlFor="email" className="sr-only">Email address</Label>
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <EnhancedInput
-                    id="email"
-                    type="email"
-                    autoComplete="email"
-                    aria-label="Email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={placeholder}
-                    required
-                    className="pl-10"
-                    disabled={isLoading}
-                  />
-                </div>
-              </div>
-
-              {/* button shares the exact same track */}
-              <div className="w-[min(92vw,520px)] sm:w-auto sm:mt-0 mt-3">
-                <Button
-                  type="submit"
-                  disabled={isLoading || !email}
-                  className="h-12 w-full sm:w-auto px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
-                >
-                  {isLoading ? (
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                      <span>Joining...</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4" />
-                      <span>{buttonText}</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  )}
-                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-                </Button>
+        <form onSubmit={handleSubmit} className="w-full">
+          <div className="grid place-items-center w-full">
+            <div className="w-[min(92vw,520px)]">
+              <div className="relative">
+                <Label htmlFor="email" className="sr-only">Email address</Label>
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <EnhancedInput
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  aria-label="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={placeholder}
+                  required
+                  className="pl-10"
+                  disabled={isLoading}
+                />
               </div>
             </div>
-          </form>
-        </BoxReveal>
 
-        <BoxReveal boxColor="hsl(var(--primary))" duration={0.4}>
-          <p className="text-xs text-muted-foreground text-center mt-4">
-            By signing up, you agree to our{' '}
-            <a href="#" className="underline hover:text-primary transition-colors">Terms of Service</a>{' '}
-            and{' '}
-            <a href="#" className="underline hover:text-primary transition-colors">Privacy Policy</a>.
-          </p>
-        </BoxReveal>
+            <div className="w-[min(92vw,520px)] sm:w-auto sm:mt-0 mt-3">
+              <Button
+                type="submit"
+                disabled={isLoading || !email}
+                className="h-12 w-full sm:w-auto px-5 group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+              >
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                    <span>Joining...</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4" />
+                    <span>{buttonText}</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                )}
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+              </Button>
+            </div>
+          </div>
+        </form>
+
+        <p className="text-xs text-muted-foreground text-center mt-4">
+          By signing up, you agree to our{' '}
+          <a href="#" className="underline hover:text-primary transition-colors">Terms of Service</a>{' '}
+          and{' '}
+          <a href="#" className="underline hover:text-primary transition-colors">Privacy Policy</a>.
+        </p>
       </div>
     </div>
   );
@@ -372,17 +312,12 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
 /* ---------------------------- Page: default export ---------------------------- */
 
 export default function EmailCollectionPage() {
-  const handleEmailSubmit = (email: string) => {
-    console.log('Email submitted:', email);
-  };
-
   return (
     <EmailSignup
       title="Monwhoopers Email List"
       subtitle="Stay up to date with Monwhoopers content pertaining to Health, Wealth & Self."
       buttonText="Get Access"
       placeholder="Enter your email address"
-      onSubmit={handleEmailSubmit}
     />
   );
 }
