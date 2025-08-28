@@ -8,6 +8,117 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
+/* ============================ CleanEmailSignup (NEW) ============================ */
+/* desktop-friendly, mobile keeps the stacked layout via md: classes */
+function CleanEmailSignup() {
+  const [email, setEmail] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!email) return;
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) setIsSubmitted(true);
+      else alert("Something went wrong. Try again.");
+    } catch (err) {
+      console.error(err);
+      alert("Error sending email.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  if (isSubmitted) {
+    return (
+      <section className="min-h-[70vh] grid place-items-center px-4">
+        <div className="w-full max-w-2xl text-center space-y-4">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/20">
+            <Check className="h-7 w-7 text-green-600 dark:text-green-400" />
+          </div>
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
+            You're all set!
+          </h1>
+          <p className="text-muted-foreground">
+            Thanks! We'll be in touch soon.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="min-h-[70vh] grid place-items-center px-4">
+      <div className="w-full max-w-2xl space-y-6">
+        <div className="text-center space-y-3">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+            Monwhoopers Email List
+          </h1>
+          <p className="text-muted-foreground">
+            Stay up to date with Monwhoopers content pertaining to Health, Wealth & Self.
+          </p>
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="w-full">
+          {/* On desktop: input + button inline; on mobile: stacked */}
+          <div className="grid gap-3 md:grid-cols-[1fr_auto]">
+            <div className="relative">
+              <Label htmlFor="email" className="sr-only">Email</Label>
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                className="h-12 pl-10"
+                disabled={isLoading}
+              />
+            </div>
+
+            <Button
+              type="submit"
+              disabled={isLoading || !email}
+              className="h-12 md:w-[150px] justify-center"
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                  Joining...
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Sparkles className="h-4 w-4" />
+                  Get Access
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+              )}
+            </Button>
+          </div>
+
+          <p className="mt-3 text-center text-xs text-muted-foreground">
+            By signing up, you agree to our{" "}
+            <a href="#" className="underline hover:text-primary">Terms of Service</a>{" "}
+            and{" "}
+            <a href="#" className="underline hover:text-primary">Privacy Policy</a>.
+          </p>
+        </form>
+      </div>
+    </section>
+  );
+}
+/* ============================================================================ */
+
+
 /* ------------------------------- GlowEffect ------------------------------- */
 
 type GlowEffectProps = {
@@ -178,7 +289,7 @@ const EnhancedInput = memo(
   })
 );
 
-/* ------------------------------- EmailSignup ------------------------------ */
+/* ------------------------------- EmailSignup (original) ------------------------------ */
 
 interface EmailSignupProps {
   title?: string;
@@ -312,12 +423,6 @@ const EmailSignup: React.FC<EmailSignupProps> = ({
 /* ---------------------------- Page: default export ---------------------------- */
 
 export default function EmailCollectionPage() {
-  return (
-    <EmailSignup
-      title="Monwhoopers Email List"
-      subtitle="Stay up to date with Monwhoopers content pertaining to Health, Wealth & Self."
-      buttonText="Get Access"
-      placeholder="Enter your email address"
-    />
-  );
+  // use the clean desktop-first version (mobile remains stacked)
+  return <CleanEmailSignup />;
 }
