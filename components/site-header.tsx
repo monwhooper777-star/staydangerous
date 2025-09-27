@@ -11,7 +11,8 @@ const menuItem = [
   { id: 1, label: "Email Collection", href: "/email-collection" },
   { id: 2, label: "Kangen Water®", href: "/kangen-water" },
   { id: 3, label: "Monwhooper Philosophy", href: "/philosophy" },
-  { id: 4, label: "WakeWaterCo™", href: "https://wakewaterco.com/", external: true },
+  { id: 4, label: "MWSD Gallery", href: "/mwsd-gallery" },  // ✅ new link
+  { id: 5, label: "WakeWaterCo™", href: "https://wakewaterco.com/", external: true },
 ];
 
 export function SiteHeader() {
