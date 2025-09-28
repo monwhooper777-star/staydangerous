@@ -1,25 +1,32 @@
-// app/(marketing)/mwsd-gallery/page.tsx
-import InfiniteGallery from "@/components/ui/3d-gallery-photography";
+// components/ErrorBoundary.tsx
+"use client";
+import React from "react";
 
-export default function MwsdGalleryPage() {
-  const sampleImages = [
-    {
-      src: "https://images.unsplash.com/photo-1741332966416-414d8a5b8887?w=600&auto=format&fit=crop&q=60",
-      alt: "Image 1",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1754769440490-2eb64d715775?q=80&w=1110",
-      alt: "Image 2",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1754769440490-2eb64d715999?q=80&w=1110",
-      alt: "Image 3",
-    },
-  ];
-
-  return (
-    <main className="min-h-screen flex items-center justify-center bg-black">
-      <InfiniteGallery images={sampleImages} />
-    </main>
-  );
+export default class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; msg?: string }
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError(err: any) {
+    return { hasError: true, msg: String(err?.message ?? err) };
+  }
+  componentDidCatch(err: any, info: any) {
+    console.error("Client error:", err, info);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="rounded-md border border-white/20 bg-black/70 p-4 text-sm text-white">
+          <p className="font-medium">Something went wrong rendering this section.</p>
+          <pre className="mt-2 max-w-full overflow-auto whitespace-pre-wrap opacity-70">
+            {this.state.msg}
+          </pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
 }
