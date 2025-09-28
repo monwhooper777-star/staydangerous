@@ -1,9 +1,8 @@
-import Image from "next/image";
-
-
 "use client";
-import { useState, useEffect, useRef } from "react";
+
+import type { LucideIcon } from "lucide-react";
 import { ArrowRight, Link, Zap } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,10 +10,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 interface TimelineItem {
   id: number;
   title: string;
+  icon?: LucideIcon; // typed once, optional
   date: string;
   content: string;
   category: string;
-  icon: React.ElementType;
   relatedIds: number[];
   status: "completed" | "in-progress" | "pending";
   energy: number;
@@ -27,17 +26,12 @@ interface RadialOrbitalTimelineProps {
 export default function RadialOrbitalTimeline({
   timelineData,
 }: RadialOrbitalTimelineProps) {
-  const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>(
-    {}
-  );
+  const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>({});
   const [viewMode, setViewMode] = useState<"orbital">("orbital");
   const [rotationAngle, setRotationAngle] = useState<number>(0);
   const [autoRotate, setAutoRotate] = useState<boolean>(true);
   const [pulseEffect, setPulseEffect] = useState<Record<number, boolean>>({});
-  const [centerOffset, setCenterOffset] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
+  const [centerOffset, setCenterOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [activeNodeId, setActiveNodeId] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const orbitRef = useRef<HTMLDivElement>(null);
@@ -56,9 +50,7 @@ export default function RadialOrbitalTimeline({
     setExpandedItems((prev) => {
       const newState = { ...prev };
       Object.keys(newState).forEach((key) => {
-        if (parseInt(key) !== id) {
-          newState[parseInt(key)] = false;
-        }
+        if (parseInt(key) !== id) newState[parseInt(key)] = false;
       });
 
       newState[id] = !prev[id];
@@ -68,11 +60,11 @@ export default function RadialOrbitalTimeline({
         setAutoRotate(false);
 
         const relatedItems = getRelatedItems(id);
-        const newPulseEffect: Record<number, boolean> = {};
+        const newPulse: Record<number, boolean> = {};
         relatedItems.forEach((relId) => {
-          newPulseEffect[relId] = true;
+          newPulse[relId] = true;
         });
-        setPulseEffect(newPulseEffect);
+        setPulseEffect(newPulse);
 
         centerViewOnNode(id);
       } else {
@@ -86,31 +78,24 @@ export default function RadialOrbitalTimeline({
   };
 
   useEffect(() => {
-    let rotationTimer: NodeJS.Timeout;
+    let rotationTimer: NodeJS.Timeout | undefined;
 
     if (autoRotate && viewMode === "orbital") {
       rotationTimer = setInterval(() => {
-        setRotationAngle((prev) => {
-          const newAngle = (prev + 0.3) % 360;
-          return Number(newAngle.toFixed(3));
-        });
+        setRotationAngle((prev) => Number(((prev + 0.3) % 360).toFixed(3)));
       }, 50);
     }
 
     return () => {
-      if (rotationTimer) {
-        clearInterval(rotationTimer);
-      }
+      if (rotationTimer) clearInterval(rotationTimer);
     };
   }, [autoRotate, viewMode]);
 
   const centerViewOnNode = (nodeId: number) => {
     if (viewMode !== "orbital" || !nodeRefs.current[nodeId]) return;
-
     const nodeIndex = timelineData.findIndex((item) => item.id === nodeId);
     const totalNodes = timelineData.length;
     const targetAngle = (nodeIndex / totalNodes) * 360;
-
     setRotationAngle(270 - targetAngle);
   };
 
@@ -123,10 +108,7 @@ export default function RadialOrbitalTimeline({
     const y = radius * Math.sin(radian) + centerOffset.y;
 
     const zIndex = Math.round(100 + 50 * Math.cos(radian));
-    const opacity = Math.max(
-      0.4,
-      Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2))
-    );
+    const opacity = Math.max(0.4, Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2)));
 
     return { x, y, angle, zIndex, opacity };
   };
@@ -149,7 +131,6 @@ export default function RadialOrbitalTimeline({
       case "in-progress":
         return "text-black bg-white border-black";
       case "pending":
-        return "text-white bg-black/40 border-white/50";
       default:
         return "text-white bg-black/40 border-white/50";
     }
@@ -186,13 +167,12 @@ export default function RadialOrbitalTimeline({
             const isExpanded = expandedItems[item.id];
             const isRelated = isRelatedToActive(item.id);
             const isPulsing = pulseEffect[item.id];
-            const Icon = item.icon;
 
             const nodeStyle = {
               transform: `translate(${position.x}px, ${position.y}px)`,
               zIndex: isExpanded ? 200 : position.zIndex,
               opacity: isExpanded ? 1 : position.opacity,
-            };
+            } as const;
 
             return (
               <div
@@ -240,12 +220,12 @@ export default function RadialOrbitalTimeline({
                   ${isExpanded ? "scale-150" : ""}
                 `}
                 >
-                  <Icon size={16} />
+                  {item.icon && <item.icon size={16} className="inline-block" />}
                 </div>
 
                 <div
                   className={`
-                  absolute top-12  whitespace-nowrap
+                  absolute top-12 whitespace-nowrap
                   text-xs font-semibold tracking-wider
                   transition-all duration-300
                   ${isExpanded ? "text-white scale-125" : "text-white/70"}
@@ -259,24 +239,16 @@ export default function RadialOrbitalTimeline({
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-white/50"></div>
                     <CardHeader className="pb-2">
                       <div className="flex justify-between items-center">
-                        <Badge
-                          className={`px-2 text-xs ${getStatusStyles(
-                            item.status
-                          )}`}
-                        >
+                        <Badge className={`px-2 text-xs ${getStatusStyles(item.status)}`}>
                           {item.status === "completed"
                             ? "COMPLETE"
                             : item.status === "in-progress"
                             ? "IN PROGRESS"
                             : "PENDING"}
                         </Badge>
-                        <span className="text-xs font-mono text-white/50">
-                          {item.date}
-                        </span>
+                        <span className="text-xs font-mono text-white/50">{item.date}</span>
                       </div>
-                      <CardTitle className="text-sm mt-2">
-                        {item.title}
-                      </CardTitle>
+                      <CardTitle className="text-sm mt-2">{item.title}</CardTitle>
                     </CardHeader>
                     <CardContent className="text-xs text-white/80">
                       <p>{item.content}</p>
@@ -307,9 +279,7 @@ export default function RadialOrbitalTimeline({
                           </div>
                           <div className="flex flex-wrap gap-1">
                             {item.relatedIds.map((relatedId) => {
-                              const relatedItem = timelineData.find(
-                                (i) => i.id === relatedId
-                              );
+                              const relatedItem = timelineData.find((i) => i.id === relatedId);
                               return (
                                 <Button
                                   key={relatedId}
@@ -322,10 +292,7 @@ export default function RadialOrbitalTimeline({
                                   }}
                                 >
                                   {relatedItem?.title}
-                                  <ArrowRight
-                                    size={8}
-                                    className="ml-1 text-white/60"
-                                  />
+                                  <ArrowRight size={8} className="ml-1 text-white/60" />
                                 </Button>
                               );
                             })}
