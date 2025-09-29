@@ -1,6 +1,4 @@
 "use client";
-export default function InfiniteGallery(/* props */) { /* returns JSX */ }
-
 
 import React, {
   useRef,
@@ -434,7 +432,7 @@ export default function InfiniteGallery({
         <FallbackGallery images={images} />
       </div>
     );
-    }
+  }
 
   return (
     <div className={className} style={style}>
