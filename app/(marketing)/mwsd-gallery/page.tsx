@@ -1,24 +1,31 @@
 "use client";
 import dynamic from "next/dynamic";
+import ClientBoundary from "@/components/ClientBoundary";
+
+// IMPORTANT: use images that exist in /public to avoid CORS while we test.
+// If you have /public/bike.png in your repo (you showed it in VS Code), use it.
+// Swap these src values for any files you actually have in /public.
+const sampleImages = [
+  { src: "/bike.png", alt: "Local 1" },
+  { src: "/monwhooper-logo.png", alt: "Local 2" },   // replace with real file
+  { src: "/hero.jpg", alt: "Local 3" },              // replace with real file
+];
 
 const GalleryUI = dynamic(
-  () => import("@/components/ui/3d-gallery-photography"), // <-- this exact path
+  () => import("@/components/ui/3d-gallery-photography"),
   { ssr: false, loading: () => <div className="text-white p-4">Loading gallery…</div> }
 );
 
 export default function MwsdGalleryPage() {
-  const sampleImages = [
-    { src: "https://images.unsplash.com/photo-1517816428104-797684b1dc97?w=1280&q=60&auto=format&fit=crop", alt: "Image 1" },
-    { src: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=1280&q=60&auto=format&fit=crop", alt: "Image 2" },
-    { src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1280&q=60&auto=format&fit=crop", alt: "Image 3" },
-  ];
   return (
     <main className="min-h-screen bg-black text-white">
       <div className="mx-auto my-6 w-fit rounded border border-white/20 px-3 py-1 text-xs">
         mwsd-gallery mounted
       </div>
       <div className="container mx-auto px-4 pb-16">
-        <GalleryUI images={sampleImages} />
+        <ClientBoundary>
+          <GalleryUI images={sampleImages} />
+        </ClientBoundary>
       </div>
     </main>
   );
