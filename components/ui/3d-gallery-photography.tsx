@@ -1,4 +1,6 @@
 "use client";
+export default function InfiniteGallery(/* props */) { /* returns JSX */ }
+
 
 import React, {
   useRef,
