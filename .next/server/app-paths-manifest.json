@@ -1,0 +1,16 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/test/route": "app/api/test/route.js",
+  "/api/send/route": "app/api/send/route.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/(auth)/signin/page": "app/(auth)/signin/page.js",
+  "/(marketing)/mwsd-gallery/page": "app/(marketing)/mwsd-gallery/page.js",
+  "/(marketing)/email-collection/page": "app/(marketing)/email-collection/page.js",
+  "/(auth)/signup/page": "app/(auth)/signup/page.js",
+  "/(marketing)/page": "app/(marketing)/page.js",
+  "/(marketing)/kangen-water/page": "app/(marketing)/kangen-water/page.js",
+  "/(marketing)/philosophy/page": "app/(marketing)/philosophy/page.js",
+  "/(marketing)/privacy/page": "app/(marketing)/privacy/page.js",
+  "/(marketing)/terms/page": "app/(marketing)/terms/page.js"
+}
