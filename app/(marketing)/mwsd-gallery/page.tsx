@@ -1,25 +1,44 @@
 "use client";
 
-import React from "react";
+import React, { ComponentType } from "react";
 import dynamic from "next/dynamic";
 
-const sampleImages = [
+// ---- Props the gallery component expects (minimal + flexible) ----
+type GalleryProps = {
+  images: { src: string; alt?: string }[];
+  speed?: number;
+  zSpacing?: number;
+  visibleCount?: number;
+  falloff?: { near: number; far: number };
+  className?: string;
+  style?: React.CSSProperties;
+  // tolerate extra config if the component supports it
+  fadeSettings?: any;
+  blurSettings?: any;
+};
+
+const sampleImages: GalleryProps["images"] = [
   { src: "/bike.png", alt: "Local 1" },
   { src: "/SDhero.png", alt: "Local 2" },
   { src: "/phone.png", alt: "Local 3" },
   { src: "/holder.png", alt: "Local 4" },
 ];
 
-// Support both default and named export (e.g., InfiniteGallery)
-const GalleryUI = dynamic(async () => {
-  const mod = await import("@/components/ui/3d-gallery-photography");
-  return (mod as any).default ?? (mod as any).InfiniteGallery;
-}, {
-  ssr: false,
-  loading: () => <div className="text-white p-4">Loading gallery…</div>,
-});
+// ---- Typed dynamic import: supports default OR named export ----
+type GalleryModule = {
+  default?: ComponentType<GalleryProps>;
+  InfiniteGallery?: ComponentType<GalleryProps>;
+};
 
-// Minimal client-side error boundary (prevents total white screen)
+const GalleryUI = dynamic<GalleryProps>(
+  async () => {
+    const mod = (await import("@/components/ui/3d-gallery-photography")) as GalleryModule;
+    return (mod.default ?? mod.InfiniteGallery)!;
+  },
+  { ssr: false, loading: () => <div className="text-white p-4">Loading gallery…</div> }
+);
+
+// Minimal error boundary so you never get a total white screen
 class GalleryBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean }
