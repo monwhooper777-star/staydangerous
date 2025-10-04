@@ -17,10 +17,11 @@ type GalleryProps = {
   blurSettings?: any;
 };
 
+// ---- Local sample images ----
 const sampleImages: GalleryProps["images"] = [
   { src: "/bike.png", alt: "Local 1" },
   { src: "/SDhero.png", alt: "Local 2" },
-  { src: "/phone.png", alt: "Local 3" },
+  { src: "/iphone.png", alt: "Monwhooper iPhone Mockup" }, // 👈 added image
   { src: "/holder.png", alt: "Local 4" },
 ];
 
@@ -38,7 +39,7 @@ const GalleryUI = dynamic<GalleryProps>(
   { ssr: false, loading: () => <div className="text-white p-4">Loading gallery…</div> }
 );
 
-// Minimal error boundary so you never get a total white screen
+// ---- Error boundary so the app never white-screens ----
 class GalleryBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean }
@@ -47,7 +48,9 @@ class GalleryBoundary extends React.Component<
     super(props);
     this.state = { hasError: false };
   }
-  static getDerivedStateFromError() { return { hasError: true }; }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
   componentDidCatch() {}
   render() {
     if (this.state.hasError) {
@@ -64,6 +67,7 @@ class GalleryBoundary extends React.Component<
   }
 }
 
+// ---- Page component ----
 export default function MwsdGalleryPage() {
   return (
     <main className="relative min-h-screen w-full bg-black text-white">
