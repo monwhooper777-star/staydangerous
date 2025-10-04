@@ -23,6 +23,7 @@ const sampleImages: GalleryProps["images"] = [
   { src: "/SDhero.png", alt: "Local 2" },
   { src: "/iphone.png", alt: "Monwhooper iPhone Mockup" }, // 👈 added image
   { src: "/holder.png", alt: "Local 4" },
+  { src: "/3d.png", alt: "Local 5" },
 ];
 
 // ---- Typed dynamic import: supports default OR named export ----
