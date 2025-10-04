@@ -14,22 +14,22 @@ export default function ClientSection() {
             <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
               <li className="flex items-center">
                 <img
-                  src="/wakewaterco.png"
-                  alt="Wake Water Co"
+                  src="/w.png"
+                  alt="w"
                   className="h-20 w-auto object-contain"
                 />
               </li>
               <li className="flex items-center">
                 <img
-                  src="/xrp.png"
-                  alt="XRP"
+                  src="/x.png"
+                  alt="x"
                   className="h-20 w-auto object-contain"
                 />
               </li>
               <li className="flex items-center">
                 <img
-                  src="/enagic.png"
-                  alt="Enagic"
+                  src="/e.png"
+                  alt="e"
                   className="h-20 w-auto object-contain"
                 />
               </li>
