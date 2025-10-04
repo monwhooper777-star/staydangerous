@@ -15,6 +15,10 @@ const footerNavs = [
         name: "Kangen Water®",
       },
       {
+        href: "/mwsd-gallery", // 👈 new link added here
+        name: "MWSD Gallery",
+      },
+      {
         href: "/philosophy",
         name: "Monwhooper Philosophy",
       },
@@ -65,16 +69,16 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-screen-xl xl:pb-2">
         <div className="md:flex md:justify-between px-8 p-4 py-16 sm:pb-16 gap-4">
           <div className="mb-12 flex-col flex gap-4">
-          <Link href="/" className="flex items-center gap-2">
-  <img
-    src="/monwhooperlogo.png"
-    alt="Monwhooper Footer Logo"
-    className="h-12 w-auto object-contain"
-  />
-  <span className="gotha self-center text-2xl font-normal whitespace-nowrap dark:text-white">
-    Monwhooper
-  </span>
-</Link>
+            <Link href="/" className="flex items-center gap-2">
+              <img
+                src="/monwhooperlogo.png"
+                alt="Monwhooper Footer Logo"
+                className="h-12 w-auto object-contain"
+              />
+              <span className="gotha self-center text-2xl font-normal whitespace-nowrap dark:text-white">
+                Monwhooper
+              </span>
+            </Link>
             <p className="max-w-xs">Stay Dangerous | Health, Wealth & Self</p>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:gap-10 sm:grid-cols-3">
