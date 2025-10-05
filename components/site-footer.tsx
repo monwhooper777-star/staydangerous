@@ -8,7 +8,7 @@ const footerNavs = [
     items: [
       {
         href: "/email-collection",
-        name: "Email Collection",
+        name: "Email List", // 🔥 changed from "Email Collection"
       },
       {
         href: "/kangen-water",
@@ -41,7 +41,6 @@ const footerNavs = [
         href: "/terms",
         name: "Terms",
       },
-
       {
         href: "/privacy",
         name: "Privacy",
