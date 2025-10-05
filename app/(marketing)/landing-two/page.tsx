@@ -1,6 +1,6 @@
-// app/landing-two/page.tsx
-import { Hero } from "@/components/landingtwo/Hero";
-import { HeroVideoDialog } from "@/components/landingtwo/HeroVideoDialog";
+import { Hero } from "@/components/landingtwo/hero";
+import { HeroVideoDialog } from "@/components/landingtwo/herovideodialog";
+
 
 export const metadata = {
   title: "Monwhooper – Stay Dangerous | Water That Fights Back",
