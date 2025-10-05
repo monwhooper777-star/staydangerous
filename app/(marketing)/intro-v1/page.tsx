@@ -1,6 +1,6 @@
 import { Hero } from "@/components/landingtwo/hero";
 import { HeroVideoDialog } from "@/components/landingtwo/herovideodialog";
-
+import CTAWithVerticalMarquee from "@/components/CTAWithVerticalMarquee"; // 👈 imported new component
 
 export const metadata = {
   title: "Monwhooper – Stay Dangerous | Water That Fights Back",
@@ -62,6 +62,11 @@ export default function LandingTwoPage() {
             Learn about Kangen
           </a>
         </div>
+      </section>
+
+      {/* --- CTA WITH VERTICAL MARQUEE SECTION --- */}
+      <section className="border-t border-border/20">
+        <CTAWithVerticalMarquee />
       </section>
     </main>
   );
