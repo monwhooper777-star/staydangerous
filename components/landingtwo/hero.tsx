@@ -25,7 +25,7 @@ function Hero() {
         <div className="flex flex-col items-center justify-center gap-8 py-20 lg:py-40">
           <div>
             <Button variant="secondary" size="sm" className="gap-4">
-              Read our launch article <MoveRight className="h-4 w-4" />
+              Welcome. <MoveRight className="h-4 w-4" />
             </Button>
           </div>
 
@@ -53,10 +53,10 @@ function Hero() {
             </h1>
 
             <p className="max-w-2xl text-center text-lg leading-relaxed tracking-tight text-muted-foreground md:text-xl">
-              Managing a small business today is already tough. Avoid further
-              complications by ditching outdated, tedious trade methods. Our
-              goal is to streamline SMB trade, making it easier and faster than
-              ever.
+              More and more people are becoming aware of the importance of
+              having access to high-quality water—from entire communities such
+              as WakeWaterCo, to medical professionals, notable figures,
+              celebrities, and everyday people.
             </p>
           </div>
 
