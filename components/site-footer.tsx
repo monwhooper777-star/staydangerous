@@ -22,6 +22,10 @@ const footerNavs = [
         href: "/philosophy",
         name: "Monwhooper Philosophy",
       },
+      {
+        href: "/intro-v1", // 👈 updated new link
+        name: "Intro V1", // 👈 label for new page
+      },
     ],
   },
 
