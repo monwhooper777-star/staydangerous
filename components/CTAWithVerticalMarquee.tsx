@@ -61,11 +61,11 @@ function VerticalMarquee({
 }
 
 const marqueeItems = [
-  "Content Agencies",
-  "Founders & Execs",
-  "Social Media Managers",
-  "Content Marketers",
-  "Growth Teams",
+  "Eagle Rock, Los Angeles, CA",
+  "Echo Park, Los Angeles, CA",
+  "Pasadena, CA",
+  "Glendale, CA",
+  "Burbank, CA",
 ];
 
 export default function CTAWithVerticalMarquee() {
