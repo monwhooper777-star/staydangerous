@@ -1,6 +1,7 @@
 import { Hero } from "@/components/landingtwo/hero";
 import { HeroVideoDialog } from "@/components/landingtwo/herovideodialog";
-import CTAWithVerticalMarquee from "@/components/CTAWithVerticalMarquee"; // 👈 imported new component
+import CTAWithVerticalMarquee from "@/components/CTAWithVerticalMarquee";
+import { TestimonialsSection } from "@/components/ui/testimonials-with-marquee"; // 👈 add this
 
 export const metadata = {
   title: "Monwhooper – Stay Dangerous | Water That Fights Back",
@@ -35,33 +36,44 @@ export default function LandingTwoPage() {
         </div>
       </section>
 
-      {/* --- FUTURE SECTIONS (WHY / WAKE) --- */}
-      {/* <section id="why" className="border-t border-border/20 py-20">...</section> */}
-      {/* <section id="switch" className="border-t border-border/20 bg-muted/10 py-20">...</section> */}
-
-      {/* --- FOOTER CTA --- */}
-      <section className="border-t border-border/20 py-24 text-center">
-        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Drink with intent.
-        </h2>
-        <p className="mx-auto mt-3 max-w-xl text-base text-muted-foreground">
-          If you’re here from an ad, welcome. Try the 7-day hydration reset and
-          see what changes first.
-        </p>
-        <div className="mt-6 flex justify-center gap-3">
-          <a
-            href="/wake/starter"
-            className="rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow hover:opacity-90"
-          >
-            Start the reset
-          </a>
-          <a
-            href="/kangen-water"
-            className="rounded-2xl border border-border px-5 py-3 text-sm font-medium hover:bg-muted/10"
-          >
-            Learn about Kangen
-          </a>
-        </div>
+      {/* --- TESTIMONIALS (replaces “Drink with intent.” block) --- */}
+      <section className="border-t border-border/20 py-24">
+        <TestimonialsSection
+          title="Trusted by hydration enthusiasts worldwide"
+          description="Join people who’ve felt the difference with Kangen® water."
+          testimonials={[
+            {
+              author: {
+                name: "Sofia Rodriguez",
+                handle: "@sofiahydrated",
+                image: "/avatars/sofia.jpg",
+              },
+              text:
+                "Energy up, recovery smoother—hydration actually feels different.",
+            },
+            {
+              author: {
+                name: "Marcus Lee",
+                handle: "@marcuswellness",
+                image: "/avatars/marcus.jpg",
+              },
+              text:
+                "Didn’t expect it, but you can *taste* the difference.",
+            },
+            {
+              author: {
+                name: "Emma Thompson",
+                handle: "@drinksmarter",
+                image: "/avatars/emma.jpg",
+              },
+              text:
+                "Clean, crisp, consistent. I’m not going back.",
+            },
+          ]}
+          // If you want it always dark, keep the next line.
+          // Remove it to let theme toggle handle colors.
+          className="bg-neutral-950 text-neutral-50"
+        />
       </section>
 
       {/* --- CTA WITH VERTICAL MARQUEE SECTION --- */}
