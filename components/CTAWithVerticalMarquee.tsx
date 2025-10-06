@@ -107,7 +107,7 @@ export default function CTAWithVerticalMarquee() {
           {/* Left Content */}
           <div className="space-y-8 max-w-xl">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-tight tracking-tight">
-              Get Started in Minutes
+              FREE Water Trials
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
               Start getting more distribution and ROI out of your content. Try
