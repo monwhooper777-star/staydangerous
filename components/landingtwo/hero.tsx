@@ -9,7 +9,7 @@ import AvatarBadge from "@/components/ui/AvatarBadge"; // 👈 added import
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
-    () => ["amazing", "new", "wonderful", "beautiful", "smart"],
+    () => ["hydrating", "mind-opening", "innovative", "different", "holistic"],
     []
   );
 
