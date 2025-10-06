@@ -12,7 +12,7 @@ const menuItem = [
   { id: 1, label: "Email Collection", href: "/email-collection" },
   { id: 2, label: "Kangen Water®", href: "/kangen-water" },
   { id: 3, label: "Monwhooper Philosophy", href: "/philosophy" },
-  { id: 4, label: "MWSD Gallery", href: "/mwsd-gallery" }, // ✅ new link
+  { id: 4, label: "MWSD Gallery", href: "/mwsd-gallery" },
   { id: 5, label: "WakeWaterCo™", href: "https://wakewaterco.com/", external: true },
 ];
 
@@ -51,7 +51,7 @@ export function SiteHeader() {
       {/* Top header */}
       <header className="fixed left-0 top-0 z-50 w-full px-4 animate-fade-in border-b opacity-0 backdrop-blur-[12px] [--animation-delay:600ms]">
         <div className="container mx-auto flex h-[var(--navigation-height)] w-full items-center justify-between">
-          {/* Logo (ensure /public/sig.png exists, lowercase) */}
+          {/* Logo */}
           <Link className="flex items-center justify-center" href="/" aria-label="Monwhooper Home">
             <Image
               src="/sig.png"
@@ -65,12 +65,12 @@ export function SiteHeader() {
 
           {/* Right-side buttons */}
           <div className="ml-auto flex h-full items-center">
-            {/* Kangen® button — orange bg, black text */}
+            {/* Kangen® button — bright yellow */}
             <Link
               href="https://calendar.app.google/eZRfTzmqzdqT8UFk7"
               target="_blank"
               rel="noopener noreferrer"
-              className="mr-6 text-sm rounded-md px-3 py-1.5 font-medium text-black bg-[#ff7b00] hover:bg-[#e66f00] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff7b00]"
+              className="mr-6 text-sm rounded-md px-3 py-1.5 font-medium text-black bg-[#FFD400] hover:bg-[#FFCC00] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#FFD400] shadow"
             >
               Kangen®
             </Link>
