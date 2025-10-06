@@ -29,7 +29,7 @@ export default function AvatarBadge() {
           </Avatar>
         </div>
         <p className="ml-2 text-xs text-muted-foreground">
-          Trusted by <span className="font-semibold text-foreground">experts & educators</span>
+          Trusted by <span className="font-semibold text-foreground">experts & notable figures/span>
         </p>
       </div>
     </div>
