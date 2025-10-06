@@ -90,14 +90,11 @@ export function SiteHeader() {
     alt="sig" 
     className="h-8 w-auto" 
   />
-</Link>
-
-          <div className="ml-auto flex h-full items-center">
-          <Link
+<Link
   href="https://calendar.app.google/eZRfTzmqzdqT8UFk7"
   target="_blank"
   rel="noopener noreferrer"
-  className="mr-6 text-sm rounded-md px-3 py-1.5 font-medium text-white bg-[#ff3131] hover:bg-[#e02b2b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff3131]"
+  className="mr-6 text-sm rounded-md px-3 py-1.5 font-medium text-black bg-[#ff7b00] hover:bg-[#e66f00] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff7b00]"
 >
   Kangen®
 </Link>
