@@ -27,7 +27,7 @@ function Hero() {
           {/* Top button */}
           <div>
             <Button variant="secondary" size="sm" className="gap-4">
-              Welcome. <MoveRight className="h-4 w-4" />
+              ATTENTION California. <MoveRight className="h-4 w-4" />
             </Button>
           </div>
 
