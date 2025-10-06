@@ -101,7 +101,10 @@ export default function CTAWithVerticalMarquee() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-6 py-12 overflow-hidden">
+    <section
+      id="free-trials"
+      className="min-h-screen bg-background text-foreground flex items-center justify-center px-6 py-12 overflow-hidden"
+    >
       <div className="w-full max-w-7xl animate-fade-in-up">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
@@ -110,9 +113,9 @@ export default function CTAWithVerticalMarquee() {
               FREE Water Trials
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-  Kangen® Water Trials — try electrolyzed-reduced Kangen® water.
-  Learn about the benefits and why Monwhooper uses and recommends it.
-</p>
+              Kangen® Water Trials — try electrolyzed-reduced Kangen® water.
+              Learn about the benefits and why Monwhooper uses and recommends it.
+            </p>
             <div className="flex flex-wrap gap-4">
               <button className="group relative px-6 py-3 bg-foreground text-background rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg">
                 <span className="relative z-10">START FREE TRIAL</span>
@@ -149,6 +152,6 @@ export default function CTAWithVerticalMarquee() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

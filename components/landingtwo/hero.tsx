@@ -68,9 +68,13 @@ function Hero() {
             <Button size="lg" variant="outline" className="gap-4">
               Jump on a call <PhoneCall className="h-4 w-4" />
             </Button>
-            <Button size="lg" className="gap-4">
-              Sign up here <MoveRight className="h-4 w-4" />
-            </Button>
+
+            {/* Updated button linking to the CTA section */}
+            <a href="#free-trials" className="scroll-smooth">
+              <Button size="lg" className="gap-4">
+                FREE Trials <MoveRight className="h-4 w-4" />
+              </Button>
+            </a>
           </div>
 
           {/* 👇 Subtle credibility section */}
