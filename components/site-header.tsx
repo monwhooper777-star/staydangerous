@@ -86,8 +86,8 @@ export function SiteHeader() {
         <div className="container mx-auto flex h-[var(--navigation-height)] w-full items-center justify-between">
         <Link className="flex items-center justify-center" href="/">
   <img 
-    src="/monwhooperlogo.png" 
-    alt="Monwhooper Logo" 
+    src="/sig.png" 
+    alt="sig" 
     className="h-8 w-auto" 
   />
 </Link>
