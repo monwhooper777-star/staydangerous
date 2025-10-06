@@ -39,7 +39,7 @@ export default function LandingTwoPage() {
       {/* --- TESTIMONIALS (replaces “Drink with intent.” block) --- */}
       <section className="py-24">
         <TestimonialsSection
-          title="Trusted by hydration enthusiasts worldwide"
+          title="Trusted by many worldwide"
           description="Join people who’ve felt the difference with Kangen® water."
           testimonials={[
             {
