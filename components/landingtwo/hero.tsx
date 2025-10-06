@@ -4,7 +4,9 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import AvatarBadge from "@/components/ui/AvatarBadge"; // 👈 added import
+import AvatarBadge from "@/components/ui/AvatarBadge";
+// ⬇️ add this import
+import { WaitlistDialog } from "@/components/WaitlistForm";
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -69,15 +71,15 @@ function Hero() {
               Jump on a call <PhoneCall className="h-4 w-4" />
             </Button>
 
-            {/* Updated button linking to the CTA section */}
-            <a href="#free-trials" className="scroll-smooth">
+            {/* FREE Trials opens the popup */}
+            <WaitlistDialog>
               <Button size="lg" className="gap-4">
                 FREE Trials <MoveRight className="h-4 w-4" />
               </Button>
-            </a>
+            </WaitlistDialog>
           </div>
 
-          {/* 👇 Subtle credibility section */}
+          {/* Subtle credibility section */}
           <div className="mt-6">
             <AvatarBadge />
           </div>
