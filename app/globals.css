@@ -71,85 +71,40 @@
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
 
   @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
   }
   @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
   }
   @keyframes border-beam {
-    100% {
-      offset-distance: 100%;
-    }
+    100% { offset-distance: 100%; }
   }
   @keyframes image-glow {
-    0% {
-      opacity: 0;
-      animation-timing-function: cubic-bezier(0.74, 0.25, 0.76, 1);
-    }
-    10% {
-      opacity: 0.7;
-      animation-timing-function: cubic-bezier(0.12, 0.01, 0.08, 0.99);
-    }
-    100% {
-      opacity: 0.4;
-    }
+    0% { opacity: 0; animation-timing-function: cubic-bezier(0.74, 0.25, 0.76, 1); }
+    10% { opacity: 0.7; animation-timing-function: cubic-bezier(0.12, 0.01, 0.08, 0.99); }
+    100% { opacity: 0.4; }
   }
   @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: none; }
   }
   @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
   }
   @keyframes shimmer {
-    0%,
-    90%,
-    100% {
-      background-position: calc(-100% - var(--shimmer-width)) 0;
-    }
-    30%,
-    60% {
-      background-position: calc(100% + var(--shimmer-width)) 0;
-    }
+    0%, 90%, 100% { background-position: calc(-100% - var(--shimmer-width)) 0; }
+    30%, 60% { background-position: calc(100% + var(--shimmer-width)) 0; }
   }
   @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-100% - var(--gap)));
-    }
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - var(--gap))); }
   }
   @keyframes marquee-vertical {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(calc(-100% - var(--gap)));
-    }
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(-100% - var(--gap))); }
   }
 }
 
@@ -174,14 +129,9 @@
   --border: oklch(90% 0 0);
   --input: oklch(90% 0 0);
   --ring: oklch(15% 0 0);
-
-  --color-one: #8B0000; /* #ffbd7a */
-  --color-two: #FF2400; /* #fe8bbb */
-  --color-three: oklch(65% 0.18 280); /* #9e7aff */
-  /* 
-  --color-one: oklch(85% 0.15 165); /* #37ecba */
-  --color-two: oklch(70% 0.08 240); /* #72afd3 */
-  --color-three: oklch(55% 0.25 15); /* #ff2e63 */
+  --color-one: #8B0000;
+  --color-two: #FF2400;
+  --color-three: oklch(65% 0.18 280);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -233,10 +183,18 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; }
+}
+
+/* --- GUARANTEED MARQUEE FIX --- */
+@layer utilities {
+  @keyframes marqueeVertical {
+    0% { transform: translateY(0%); }
+    100% { transform: translateY(-50%); }
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .animate-marquee-vertical {
+    animation: marqueeVertical var(--duration, 30s) linear infinite;
   }
 }
