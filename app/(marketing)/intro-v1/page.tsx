@@ -1,7 +1,7 @@
 import { Hero } from "@/components/landingtwo/hero";
 import { HeroVideoDialog } from "@/components/landingtwo/herovideodialog";
 import CTAWithVerticalMarquee from "@/components/CTAWithVerticalMarquee";
-import { TestimonialsSection } from "@/components/ui/testimonials-with-marquee"; // 👈 add this
+import { TestimonialsSection } from "@/components/ui/testimonials-with-marquee";
 
 export const metadata = {
   title: "Monwhooper – Stay Dangerous | Water That Fights Back",
@@ -37,7 +37,7 @@ export default function LandingTwoPage() {
       </section>
 
       {/* --- TESTIMONIALS (replaces “Drink with intent.” block) --- */}
-      <section className="border-t border-border/20 py-24">
+      <section className="py-24">
         <TestimonialsSection
           title="Trusted by hydration enthusiasts worldwide"
           description="Join people who’ve felt the difference with Kangen® water."
@@ -70,14 +70,12 @@ export default function LandingTwoPage() {
                 "Clean, crisp, consistent. I’m not going back.",
             },
           ]}
-          // If you want it always dark, keep the next line.
-          // Remove it to let theme toggle handle colors.
-          className="bg-neutral-950 text-neutral-50"
+          className="bg-transparent text-inherit"
         />
       </section>
 
       {/* --- CTA WITH VERTICAL MARQUEE SECTION --- */}
-      <section className="border-t border-border/20">
+      <section>
         <CTAWithVerticalMarquee />
       </section>
     </main>
