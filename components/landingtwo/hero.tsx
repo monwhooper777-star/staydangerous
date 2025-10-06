@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import AvatarBadge from "@/components/ui/AvatarBadge"; // 👈 added import
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -23,12 +24,14 @@ function Hero() {
     <div className="w-full">
       <div className="container mx-auto">
         <div className="flex flex-col items-center justify-center gap-8 py-20 lg:py-40">
+          {/* Top button */}
           <div>
             <Button variant="secondary" size="sm" className="gap-4">
               Welcome. <MoveRight className="h-4 w-4" />
             </Button>
           </div>
 
+          {/* Main headline */}
           <div className="flex flex-col gap-4">
             <h1 className="max-w-2xl text-center text-5xl font-normal tracking-tighter md:text-7xl">
               <span className="text-spektr-cyan-50">This is something</span>
@@ -60,6 +63,7 @@ function Hero() {
             </p>
           </div>
 
+          {/* CTA Buttons */}
           <div className="flex flex-row gap-3">
             <Button size="lg" variant="outline" className="gap-4">
               Jump on a call <PhoneCall className="h-4 w-4" />
@@ -67,6 +71,11 @@ function Hero() {
             <Button size="lg" className="gap-4">
               Sign up here <MoveRight className="h-4 w-4" />
             </Button>
+          </div>
+
+          {/* 👇 Subtle credibility section */}
+          <div className="mt-6">
+            <AvatarBadge />
           </div>
         </div>
       </div>
