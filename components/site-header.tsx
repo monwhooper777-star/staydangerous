@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { AlignJustify, XIcon } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const menuItem = [
@@ -18,15 +19,8 @@ const menuItem = [
 export function SiteHeader() {
   const mobilenavbarVariant = {
     initial: { opacity: 0, scale: 1 },
-    animate: {
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 0.2, ease: "easeOut" },
-    },
-    exit: {
-      opacity: 0,
-      transition: { duration: 0.2, delay: 0.2, ease: "easeOut" },
-    },
+    animate: { scale: 1, opacity: 1, transition: { duration: 0.2, ease: "easeOut" } },
+    exit: { opacity: 0, transition: { duration: 0.2, delay: 0.2, ease: "easeOut" } },
   };
 
   const mobileLinkVar = {
@@ -34,24 +28,21 @@ export function SiteHeader() {
     open: { y: 0, opacity: 1, transition: { duration: 0.3, ease: "easeOut" } },
   };
 
-  const containerVariants = {
-    open: { transition: { staggerChildren: 0.06 } },
-  };
+  const containerVariants = { open: { transition: { staggerChildren: 0.06 } } };
 
   const [hamburgerMenuIsOpen, setHamburgerMenuIsOpen] = useState(false);
 
   useEffect(() => {
-    const html = document.querySelector("html");
-    if (html) html.classList.toggle("overflow-hidden", hamburgerMenuIsOpen);
+    document.documentElement.classList.toggle("overflow-hidden", hamburgerMenuIsOpen);
   }, [hamburgerMenuIsOpen]);
 
   useEffect(() => {
-    const closeHamburgerNavigation = () => setHamburgerMenuIsOpen(false);
-    window.addEventListener("orientationchange", closeHamburgerNavigation);
-    window.addEventListener("resize", closeHamburgerNavigation);
+    const close = () => setHamburgerMenuIsOpen(false);
+    window.addEventListener("orientationchange", close);
+    window.addEventListener("resize", close);
     return () => {
-      window.removeEventListener("orientationchange", closeHamburgerNavigation);
-      window.removeEventListener("resize", closeHamburgerNavigation);
+      window.removeEventListener("orientationchange", close);
+      window.removeEventListener("resize", close);
     };
   }, []);
 
@@ -60,9 +51,16 @@ export function SiteHeader() {
       {/* Top header */}
       <header className="fixed left-0 top-0 z-50 w-full px-4 animate-fade-in border-b opacity-0 backdrop-blur-[12px] [--animation-delay:600ms]">
         <div className="container mx-auto flex h-[var(--navigation-height)] w-full items-center justify-between">
-          {/* Logo */}
-          <Link className="flex items-center justify-center" href="/">
-            <img src="/sig.png" alt="sig" className="h-8 w-auto" />
+          {/* Logo (ensure /public/sig.png exists, lowercase) */}
+          <Link className="flex items-center justify-center" href="/" aria-label="Monwhooper Home">
+            <Image
+              src="/sig.png"
+              alt="Monwhooper"
+              width={32}
+              height={32}
+              priority
+              className="h-8 w-auto"
+            />
           </Link>
 
           {/* Right-side buttons */}
@@ -92,8 +90,8 @@ export function SiteHeader() {
           <button
             className="ml-6 md:hidden"
             onClick={() => setHamburgerMenuIsOpen((open) => !open)}
+            aria-label="Toggle menu"
           >
-            <span className="sr-only">Toggle menu</span>
             {hamburgerMenuIsOpen ? <XIcon /> : <AlignJustify />}
           </button>
         </div>
@@ -112,14 +110,12 @@ export function SiteHeader() {
           )}
         >
           <div className="container mx-auto flex h-[var(--navigation-height)] items-center justify-between">
-            <Link
-              className="flex items-center justify-center"
-              href="/"
-              aria-label="Monwhooper Home"
-            >
-              <img
+            <Link className="flex items-center justify-center" href="/" aria-label="Monwhooper Home">
+              <Image
                 src="/monwhooperlogo.png"
                 alt="Monwhooper Logo"
+                width={32}
+                height={32}
                 className="h-8 w-auto"
               />
             </Link>
@@ -127,8 +123,8 @@ export function SiteHeader() {
             <button
               className="ml-6 md:hidden"
               onClick={() => setHamburgerMenuIsOpen((open) => !open)}
+              aria-label="Toggle menu"
             >
-              <span className="sr-only">Toggle menu</span>
               {hamburgerMenuIsOpen ? <XIcon /> : <AlignJustify />}
             </button>
           </div>
