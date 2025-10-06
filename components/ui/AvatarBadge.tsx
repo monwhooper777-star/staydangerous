@@ -10,36 +10,36 @@ export default function AvatarBadge() {
         <div className="flex -space-x-2">
           <Avatar className="h-6 w-6 ring-2 ring-background">
             <AvatarImage
-              src="https://randomuser.me/api/portraits/men/32.jpg"
-              alt="Dr. Andrew Huberman"
+              src="jhen.png"
+              alt="Jhene Aiko"
             />
             <AvatarFallback>AH</AvatarFallback>
           </Avatar>
           <Avatar className="h-6 w-6 ring-2 ring-background">
             <AvatarImage
-              src="https://randomuser.me/api/portraits/men/48.jpg"
-              alt="Tony Robbins"
+              src="/big.png"
+              alt="Big Sean"
             />
             <AvatarFallback>TR</AvatarFallback>
           </Avatar>
           <Avatar className="h-6 w-6 ring-2 ring-background">
             <AvatarImage
-              src="https://randomuser.me/api/portraits/women/44.jpg"
-              alt="Dr. Rhonda Patrick"
+              src="/mojka.png"
+              alt="Mojka"
             />
             <AvatarFallback>RP</AvatarFallback>
           </Avatar>
           <Avatar className="h-6 w-6 ring-2 ring-background">
             <AvatarImage
-              src="https://randomuser.me/api/portraits/men/36.jpg"
-              alt="Grant Cardone"
+              src="/tom.png"
+              alt="Tom Brady"
             />
             <AvatarFallback>GC</AvatarFallback>
           </Avatar>
           <Avatar className="h-6 w-6 ring-2 ring-background">
             <AvatarImage
-              src="https://randomuser.me/api/portraits/men/59.jpg"
-              alt="Dr. Joe Dispenza"
+              src="step.png"
+              alt="Steph Curry"
             />
             <AvatarFallback>JD</AvatarFallback>
           </Avatar>
