@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AvatarBadge from "@/components/ui/AvatarBadge";
-// ⬇️ add this import
 import { WaitlistDialog } from "@/components/WaitlistForm";
 
 function Hero() {
@@ -36,7 +35,21 @@ function Hero() {
           {/* Main headline */}
           <div className="flex flex-col gap-4">
             <h1 className="max-w-2xl text-center text-5xl font-normal tracking-tighter md:text-7xl">
-              <span className="text-spektr-cyan-50">This is something</span>
+              {/* White gradient clipped to text (Safari-safe) */}
+              <span
+                className="
+                  bg-gradient-to-b from-white via-white/85 to-white/45
+                  bg-clip-text text-transparent
+                  drop-shadow-[0_0_6px_rgba(255,255,255,0.12)]
+                "
+                style={{
+                  WebkitTextFillColor: "transparent",
+                  WebkitBackgroundClip: "text",
+                }}
+              >
+                This is something
+              </span>
+
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                 &nbsp;
                 {titles.map((title, index) => (
