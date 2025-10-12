@@ -4,7 +4,6 @@ import * as React from "react";
 import { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import confetti from "canvas-confetti";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 type Props = {
@@ -28,7 +27,9 @@ export function WaitlistForm({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true); setOk(null); setErr(null);
+    setLoading(true);
+    setOk(null);
+    setErr(null);
 
     try {
       const res = await fetch("/api/waitlist", {
@@ -43,24 +44,29 @@ export function WaitlistForm({
       });
 
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Submission failed");
+        const data = await res.json().catch(() => ({} as any));
+        throw new Error((data as any).error || "Submission failed");
       }
 
-      // confetti pop
+      // 🎉 confetti (lazy import to keep bundle light & avoid TS type install)
+      const { default: confetti } = await import("canvas-confetti");
       const rect = btnRef.current?.getBoundingClientRect();
-      if (rect) {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { x: (rect.left + rect.width / 2) / window.innerWidth, y: (rect.top + rect.height / 2) / window.innerHeight },
-        });
-      }
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: rect
+          ? {
+              x: (rect.left + rect.width / 2) / window.innerWidth,
+              y: (rect.top + rect.height / 2) / window.innerHeight,
+            }
+          : { y: 0.6 },
+      });
 
-      setOk("You're on the list!"); setEmail("");
+      setOk("You're on the list!");
+      setEmail("");
       onSuccess?.();
     } catch (e: any) {
-      setErr(e.message || "Something went wrong");
+      setErr(e?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -68,7 +74,9 @@ export function WaitlistForm({
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-3">
-      <input name="hp" className="hidden" />
+      {/* Honeypot for basic spam prevention */}
+      <input name="hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
       <div className="grid gap-1">
         <label className="text-sm">Email</label>
         <Input
@@ -77,11 +85,14 @@ export function WaitlistForm({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder={placeholder}
+          autoComplete="email"
         />
       </div>
+
       <Button ref={btnRef} disabled={loading} type="submit" className="h-11">
         {loading ? "Submitting..." : buttonText}
       </Button>
+
       {ok && <p className="text-sm text-emerald-500">{ok}</p>}
       {err && <p className="text-sm text-red-500">{err}</p>}
     </form>
