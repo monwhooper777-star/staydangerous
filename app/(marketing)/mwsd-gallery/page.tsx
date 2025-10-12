@@ -29,7 +29,7 @@ const sampleImages: GalleryProps["images"] = [
   { src: "/hw2.png", alt: "Local 8" },
   { src: "/flask.png", alt: "Local 9" },
   { src: "/mwdk.png", alt: "Local 10" },
-  { src: "/MWSDK.png", alt: "Local 11" },
+  { src: "/mwsdk.png", alt: "Local 11" },
 ];
 
 // ---- Typed dynamic import: supports default OR named export ----
