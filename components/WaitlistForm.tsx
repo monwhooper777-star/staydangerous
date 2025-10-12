@@ -99,16 +99,21 @@ export function WaitlistForm({
   );
 }
 
-/** Optional: popup wrapper for your Intro V1 button */
+/** Popup wrapper — now accepts either triggerText or custom children as the trigger */
 export function WaitlistDialog({
   triggerText = "FREE Trial",
   source = "intro_v1_free_trial",
-}: { triggerText?: string; source?: string }) {
+  children,
+}: {
+  triggerText?: string;
+  source?: string;
+  children?: React.ReactNode;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg">{triggerText}</Button>
+        {children ? children : <Button size="lg">{triggerText}</Button>}
       </DialogTrigger>
       <DialogContent className="max-w-md">
         <WaitlistForm source={source} onSuccess={() => setOpen(false)} />
