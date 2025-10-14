@@ -23,7 +23,7 @@ const sampleImages: GalleryProps["images"] = [
   { src: "/SDhero.png", alt: "Local 2" },
   { src: "/iphone.png", alt: "Monwhooper iPhone Mockup" }, // 👈 added image
   { src: "/holder.png", alt: "Local 4" },
-  { src: "/3d.png", alt: "Local 5" },
+  { src: "/mwsdk.png", alt: "Local 5" },
   { src: "/hw1.png", alt: "Local 6" },
   { src: "/digi.png", alt: "Local 7" },
   { src: "/hw2.png", alt: "Local 8" },
