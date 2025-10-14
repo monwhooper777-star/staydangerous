@@ -3,12 +3,13 @@
 import InfiniteGallery from "@/components/ui/3d-gallery-photography";
 
 const galleryImages = [
-  { src: "/public/bike.jpg", alt: "Photo 1" },
-  { src: "/mwsd/mockup1.jpg", alt: "Mockup 1" },
-  { src: "/mwsd/mockup2.jpg", alt: "Mockup 2" },
-  { src: "/mwsd/photo2.jpg", alt: "Photo 2" },
-  { src: "/mwsd/mockup3.jpg", alt: "Mockup 3" },
-  { src: "/mwsd/photo3.jpg", alt: "Photo 3" },
+  { src: "/bike.png", alt: "Photo 1" },
+  { src: "/mwsdk.png", alt: "Stay Dangerous Mark 1" },
+  { src: "/iphone.png", alt: "Monwhooper iPhone Mockup" },
+  { src: "/holder.png", alt: "Holder" },
+  { src: "/hw1.png", alt: "Handwriting 1" },
+  { src: "/mwsdk.png", alt: "Stay Dangerous Mark 2" }, // show it twice, on purpose
+  // add/remove to match exactly what's in /public
 ];
 
 export default function MWInfiniteGallery() {
@@ -18,7 +19,7 @@ export default function MWInfiniteGallery() {
         images={galleryImages}
         speed={1.2}
         zSpacing={3}
-        visibleCount={12}
+        visibleCount={galleryImages.length} // show everything you passed
         falloff={{ near: 0.8, far: 14 }}
         className="h-screen w-full rounded-lg overflow-hidden"
       />
